@@ -16,7 +16,6 @@ const ITEMS = [
 const Explorations: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const quoteRef = useRef<HTMLDivElement>(null);
-  const sectionTitleRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -131,7 +130,7 @@ const Explorations: React.FC = () => {
           
           {/* Left Column */}
           <div className="flex flex-col gap-[10vh] pt-[5vh]">
-            {ITEMS.filter(item => item.side === "left").map((item, idx) => {
+            {ITEMS.filter(item => item.side === "left").map((item) => {
               const globalIdx = ITEMS.indexOf(item);
               return (
                 <div 
@@ -148,7 +147,7 @@ const Explorations: React.FC = () => {
 
           {/* Right Column */}
           <div className="flex flex-col gap-[10vh] pt-[30vh]">
-            {ITEMS.filter(item => item.side === "right").map((item, idx) => {
+            {ITEMS.filter(item => item.side === "right").map((item) => {
               const globalIdx = ITEMS.indexOf(item);
               return (
                 <div 

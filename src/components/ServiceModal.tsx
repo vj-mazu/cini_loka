@@ -50,12 +50,14 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                         loop
                         muted
                         playsInline
+                        preload="metadata"
                       />
                     ) : (
                       <img
                         src={item}
                         alt={`${service.title} gallery ${idx}`}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     )}
                   </div>

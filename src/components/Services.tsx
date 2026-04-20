@@ -57,7 +57,7 @@ const SERVICES = [
     title: "Corporate Events",
     description: "Professional meetings and team celebrations in a sophisticated venue.",
     price: "₹500",
-    gallery: ["/assets/cini-4.jpg", "/assets/cini-2.jpg", "/assets/cini-3.jpg"],
+    gallery: ["/assets/cini-4.jpg", "/assets/cini-1.jpg", "/assets/cini-3.jpg"],
     features: ["Presentation Equipment", "High-Speed Wifi", "Refreshment Support", "Flexible Seating Layouts"],
   },
   {
@@ -75,7 +75,7 @@ const SERVICES = [
     title: "Kids-Friendly Experiences",
     description: "A safe, fun, and beautifully decorated space for children's parties.",
     price: "₹500",
-    gallery: ["/assets/cini-2.jpg", "/assets/cini-4.jpg", "/assets/cini-1.jpg"],
+    gallery: ["/assets/cini-2.jpg", "/assets/bday-custom-2.jpg", "/assets/cini-1.jpg"],
     features: ["Child-Safe Environment", "Colorful Themed Decor", "Cartoon Screenings"],
   },
 ];

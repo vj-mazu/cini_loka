@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
-        className={`inline-flex items-center rounded-full backdrop-blur-md border border-white/10 bg-surface/80 px-2 py-2 transition-all duration-300 ${
+        className={`inline-flex items-center rounded-full backdrop-blur-md border border-white/10 bg-surface/80 pl-3 pr-2 py-2 transition-all duration-300 ${
           isScrolled ? "shadow-2xl shadow-black/40 ring-1 ring-white/10" : ""
         }`}
       >

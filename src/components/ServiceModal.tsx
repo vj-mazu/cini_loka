@@ -37,7 +37,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
             className="relative w-full max-w-5xl h-fit md:h-[min(850px,90vh)] bg-surface border border-white/10 rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl flex flex-col md:flex-row"
           >
             {/* Gallery Section */}
-            <div className="w-full md:w-1/2 h-64 md:h-full min-h-[300px] md:min-h-full relative bg-bg">
+            <div className="w-full md:w-1/2 aspect-[16/11] md:aspect-auto md:h-full relative bg-bg">
               <div className="absolute inset-0 flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
                 {service.gallery.map((img, idx) => (
                   <div key={idx} className="min-w-full h-full snap-center">
@@ -50,16 +50,24 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                 ))}
               </div>
               
+              {/* Close Button - Floating on mobile */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white md:hidden"
+              >
+                ✕
+              </button>
+
               {/* Image Indicators */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
                 {service.gallery.map((_, idx) => (
-                  <div key={idx} className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                  <div key={idx} className="w-1.5 h-1.5 rounded-full bg-white/40 border border-white/10" />
                 ))}
               </div>
             </div>
 
             {/* Info Section */}
-            <div className="flex-1 p-8 md:p-14 overflow-y-auto custom-scrollbar">
+            <div className="flex-1 p-6 md:p-14 overflow-y-auto custom-scrollbar">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                   <span className="text-4xl">{service.icon}</span>
@@ -71,7 +79,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                 </div>
                 <button
                   onClick={onClose}
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+                  className="hidden md:flex w-10 h-10 rounded-full bg-white/5 border border-white/10 items-center justify-center text-white hover:bg-white/10 transition-colors"
                 >
                   ✕
                 </button>

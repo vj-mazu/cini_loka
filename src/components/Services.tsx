@@ -1,44 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 const SERVICES = [
   {
+    id: "movie",
     icon: "🎬",
     title: "Private Movie Screenings",
     description: "Enjoy your favorite movies or personal videos in our cozy, state-of-the-art private theater setting with premium surround sound.",
+    price: "₹1,499",
+    gallery: ["/assets/cini-1.jpg", "/assets/cini-2.jpg", "/assets/cini-3.jpg"],
+    features: ["4K HDR Projection", "7.1 Atmos Surround", "Premium Recliner Seating", "Fully Air Conditioned"],
   },
   {
+    id: "birthday",
     icon: "🎂",
     title: "Birthday Celebrations",
     description: "Create unforgettable birthday memories with our customizable decor packages, lighting setups, and personalized party themes.",
+    price: "₹2,499",
+    gallery: ["/assets/cini-2.jpg", "/assets/cini-4.jpg", "/assets/cini-1.jpg"],
+    features: ["Custom Decor Packages", "Ambient Lighting Controls", "Party Music System", "Outside Food Allowed"],
   },
   {
+    id: "anniversary",
     icon: "💍",
     title: "Anniversary & Weddings",
     description: "Celebrate your love story with elegant floral arrangements, decorative backdrops, draping, and romantic lighting.",
+    price: "₹3,499",
+    gallery: ["/assets/cini-3.jpg", "/assets/cini-1.jpg", "/assets/cini-2.jpg"],
+    features: ["Romantic Floral Decor", "Personalized Welcome Screen", "Private Dining Setup", "Professional Photography Support"],
   },
   {
+    id: "corporate",
     icon: "🏢",
     title: "Corporate Events",
     description: "Host professional meetings, team celebrations, and corporate gatherings in a sophisticated venue environment.",
+    price: "₹4,999",
+    gallery: ["/assets/cini-4.jpg", "/assets/cini-2.jpg", "/assets/cini-3.jpg"],
+    features: ["Presentation Equipment", "High-Speed Wifi", "Refreshment Support", "Flexible Seating Layouts"],
   },
   {
+    id: "themed",
     icon: "🎨",
     title: "Themed Party Design",
     description: "From table centerpieces to custom installations — we design bespoke themed experiences tailored to your vision.",
+    price: "₹1,999",
+    gallery: ["/assets/cini-1.jpg", "/assets/cini-3.jpg", "/assets/cini-4.jpg"],
+    features: ["Expert Consultation", "Custom Backdrop Design", "Props & Installation", "Theme-based Lighting"],
   },
   {
+    id: "kids",
     icon: "👶",
     title: "Kids-Friendly Experiences",
     description: "A safe, fun, and beautifully decorated space for children's parties with age-appropriate themes and activities.",
+    price: "₹1,499",
+    gallery: ["/assets/cini-2.jpg", "/assets/cini-4.jpg", "/assets/cini-3.jpg"],
+    features: ["Child-Safe Environment", "Colorful Themed Decor", "Animation/Cartoon Screenings", "Dedicated Soft Play Area"],
   },
 ];
 
+import ServiceModal from "./ServiceModal";
+
 const Services: React.FC = () => {
+  const [selectedService, setSelectedService] = useState<typeof SERVICES[0] | null>(null);
+
   return (
     <section className="bg-bg py-16 md:py-24 border-t border-stroke/20">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-        {/* Header */}
+        {/* Header content... */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -76,6 +104,7 @@ const Services: React.FC = () => {
                 delay: idx * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
+              onClick={() => setSelectedService(service)}
               className="group relative bg-surface/30 hover:bg-surface border border-stroke/50 hover:border-stroke rounded-[2.5rem] p-10 md:p-12 transition-all duration-700 cursor-pointer"
             >
               {/* Icon */}
@@ -96,7 +125,7 @@ const Services: React.FC = () => {
               {/* Hover arrow */}
               <div className="mt-8 flex items-center gap-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
                 <span className="text-[10px] text-accent font-black tracking-[0.25em] uppercase">
-                  Learn More
+                  View Details
                 </span>
                 <span className="text-accent text-lg">→</span>
               </div>
@@ -137,6 +166,12 @@ const Services: React.FC = () => {
           </a>
         </motion.div>
       </div>
+
+      {/* Service Details Modal */}
+      <ServiceModal 
+        service={selectedService} 
+        onClose={() => setSelectedService(null)} 
+      />
     </section>
   );
 };

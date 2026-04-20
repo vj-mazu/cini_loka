@@ -11,7 +11,7 @@ const FloatingPhone: React.FC = () => {
     >
       <a
         href="tel:+917483343412"
-        className="group relative flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-full bg-white text-bg shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-300 hover:scale-110 active:scale-95 overflow-hidden"
+        className="group relative flex h-12 w-12 md:h-16 md:w-16 items-center justify-center rounded-full bg-white text-bg shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-300 hover:scale-110 active:scale-95 overflow-hidden"
       >
         {/* Animated Inner Pulse */}
         <div className="absolute inset-0 z-0 animate-pulse bg-white/10" />

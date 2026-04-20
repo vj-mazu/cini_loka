@@ -125,18 +125,18 @@ const Explorations: React.FC = () => {
       </div>
 
       {/* Parallax Images Column Layout */}
-      <div className="relative z-0 w-full max-w-[1400px] mx-auto px-6 mt-[-80px] mb-[5vh]">
-        <div className="grid grid-cols-2 gap-8 md:gap-32">
+      <div className="relative z-0 w-full max-w-[1400px] mx-auto px-4 md:px-6 mt-[-60px] md:mt-[-80px] mb-[5vh]">
+        <div className="grid grid-cols-2 gap-4 md:gap-32">
           
           {/* Left Column */}
-          <div className="flex flex-col gap-[10vh] pt-0">
+          <div className="flex flex-col gap-4 md:gap-[10vh] pt-0">
             {ITEMS.filter(item => item.side === "left").map((item) => {
               const globalIdx = ITEMS.indexOf(item);
               return (
                 <div 
                   key={globalIdx} 
                   ref={el => { itemRefs.current[globalIdx] = el; }}
-                  className="group relative w-full aspect-[4/5] rounded-[2rem] md:rounded-[4rem] overflow-hidden border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.5)]"
+                  className="group relative w-full aspect-[4/5] rounded-[1.5rem] md:rounded-[4rem] overflow-hidden border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.5)]"
                 >
                   <img src={item.image} alt="" className="w-full h-full object-cover transform scale-110 group-hover:scale-100 transition-transform duration-1000" />
                   <div className="absolute inset-0 bg-gradient-to-t from-bg/60 to-transparent opacity-40" />
@@ -146,14 +146,14 @@ const Explorations: React.FC = () => {
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col gap-[10vh] pt-[30vh]">
+          <div className="flex flex-col gap-4 md:gap-[10vh] pt-[15vh]">
             {ITEMS.filter(item => item.side === "right").map((item) => {
               const globalIdx = ITEMS.indexOf(item);
               return (
                 <div 
                   key={globalIdx} 
                   ref={el => { itemRefs.current[globalIdx] = el; }}
-                  className="group relative w-full aspect-[4/5] rounded-[3rem] md:rounded-[5rem] overflow-hidden border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.5)]"
+                  className="group relative w-full aspect-[4/5] rounded-[1.5rem] md:rounded-[5rem] overflow-hidden border border-white/5 shadow-[0_0_80px_rgba(0,0,0,0.5)]"
                 >
                   <img src={item.image} alt="" className="w-full h-full object-cover transform scale-110 group-hover:scale-100 transition-transform duration-1000" />
                   <div className="absolute inset-0 bg-gradient-to-t from-bg/60 to-transparent opacity-40" />

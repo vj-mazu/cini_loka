@@ -60,9 +60,10 @@ const Navbar: React.FC = () => {
           {/* Call Action */}
           <a
             href="tel:+917483343412"
-            className="hidden sm:inline-flex relative group px-4 py-2 text-sm rounded-full font-medium transition-all text-text-primary hover:bg-white/5"
+            className="flex relative group px-3 md:px-4 py-2 text-[10px] md:text-sm rounded-full font-medium transition-all text-text-primary hover:bg-white/5"
           >
-            Call Us
+            <span className="md:hidden">📞</span>
+            <span className="hidden md:inline">Call Us</span>
           </a>
 
           {/* Action Button — WhatsApp */}
@@ -70,7 +71,7 @@ const Navbar: React.FC = () => {
             href="https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20would%20like%20to%20book%20an%20event"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative group px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full font-medium transition-all"
+            className="relative group px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-sm rounded-full font-medium transition-all"
           >
             <span className="absolute inset-x-0 inset-y-0 -m-[1px] accent-gradient opacity-0 group-hover:opacity-100 transition-opacity rounded-full -z-10" />
             <span className="absolute inset-0 bg-surface rounded-full opacity-0 group-hover:opacity-100 -z-1" />

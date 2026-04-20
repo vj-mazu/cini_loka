@@ -55,7 +55,7 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
 
 const Reviews: React.FC = () => {
   return (
-    <section className="bg-bg pt-16 md:pt-24 pb-8 md:pb-12 border-t border-stroke/20">
+    <section className="bg-bg pt-16 md:pt-24 pb-0 border-t border-stroke/20">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
         {/* Header */}
         <motion.div

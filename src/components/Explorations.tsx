@@ -67,9 +67,9 @@ const Explorations: React.FC = () => {
       gsap.fromTo(item,
         { 
           rotation: config.initialRotate,
-          scale: 0.7,
+          scale: 0.8,
           opacity: 0,
-          filter: "blur(20px)",
+          filter: "blur(15px)",
         },
         {
           rotation: 0,
@@ -79,7 +79,7 @@ const Explorations: React.FC = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: item,
-            start: "top bottom-=100",
+            start: "top bottom",
             end: "top center",
             scrub: 1,
           }
@@ -105,7 +105,7 @@ const Explorations: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative min-h-[120vh] bg-bg overflow-hidden flex flex-col items-center">
+    <section ref={containerRef} className="relative min-h-[80vh] bg-bg overflow-hidden flex flex-col items-center">
       
       {/* Central Floating Quote - Pinned */}
       <div 
@@ -114,7 +114,7 @@ const Explorations: React.FC = () => {
       >
         <div className="flex items-center justify-center gap-4 mb-4 md:mb-6">
           <div className="w-8 h-[1px] bg-accent/30" />
-          <span className="text-[10px] text-accent uppercase tracking-[0.5em] font-black opacity-60">
+          <span className="text-[10px] text-accent uppercase tracking-[0.4em] font-black opacity-60">
             Vision
           </span>
           <div className="w-8 h-[1px] bg-accent/30" />
@@ -125,11 +125,11 @@ const Explorations: React.FC = () => {
       </div>
 
       {/* Parallax Images Column Layout */}
-      <div className="relative z-0 w-full max-w-[1400px] mx-auto px-6 mt-0 mb-[5vh]">
+      <div className="relative z-0 w-full max-w-[1400px] mx-auto px-6 mt-[-80px] mb-[5vh]">
         <div className="grid grid-cols-2 gap-8 md:gap-32">
           
           {/* Left Column */}
-          <div className="flex flex-col gap-[10vh] pt-[5vh]">
+          <div className="flex flex-col gap-[10vh] pt-0">
             {ITEMS.filter(item => item.side === "left").map((item) => {
               const globalIdx = ITEMS.indexOf(item);
               return (

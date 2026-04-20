@@ -8,6 +8,7 @@ import Reviews from "./components/Reviews";
 import Stats from "./components/Stats";
 import Explorations from "./components/Explorations";
 import Footer from "./components/Footer";
+import FloatingPhone from "./components/FloatingPhone";
 import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
               <Stats />
             </div>
             <Footer />
+            <FloatingPhone />
           </motion.main>
         )}
       </AnimatePresence>

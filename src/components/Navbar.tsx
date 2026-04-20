@@ -56,19 +56,29 @@ const Navbar: React.FC = () => {
 
         <div className="w-px h-5 bg-stroke mx-2" />
 
-        {/* Action Button — WhatsApp */}
-        <a
-          href="https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20would%20like%20to%20book%20an%20event"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative group px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full font-medium transition-all"
-        >
-          <span className="absolute inset-x-0 inset-y-0 -m-[1px] accent-gradient opacity-0 group-hover:opacity-100 transition-opacity rounded-full -z-10" />
-          <span className="absolute inset-0 bg-surface rounded-full opacity-0 group-hover:opacity-100 -z-1" />
-          <span className="relative z-10 flex items-center gap-1.5 text-text-primary">
-            Say Hi <span className="text-[10px] opacity-60">↗</span>
-          </span>
-        </a>
+        <div className="flex items-center gap-1 sm:gap-2 pr-1">
+          {/* Call Action */}
+          <a
+            href="tel:+917483343412"
+            className="hidden sm:inline-flex relative group px-4 py-2 text-sm rounded-full font-medium transition-all text-text-primary hover:bg-white/5"
+          >
+            Call Us
+          </a>
+
+          {/* Action Button — WhatsApp */}
+          <a
+            href="https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20would%20like%20to%20book%20an%20event"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative group px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full font-medium transition-all"
+          >
+            <span className="absolute inset-x-0 inset-y-0 -m-[1px] accent-gradient opacity-0 group-hover:opacity-100 transition-opacity rounded-full -z-10" />
+            <span className="absolute inset-0 bg-surface rounded-full opacity-0 group-hover:opacity-100 -z-1" />
+            <span className="relative z-10 flex items-center gap-1.5 text-text-primary">
+              Say Hi <span className="text-[10px] opacity-60">↗</span>
+            </span>
+          </a>
+        </div>
       </motion.div>
     </nav>
   );

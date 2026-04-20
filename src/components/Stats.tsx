@@ -10,7 +10,7 @@ const STATS = [
 
 const Stats: React.FC = () => {
   return (
-    <section className="bg-bg py-16 md:py-24 border-t border-stroke/30">
+    <section className="bg-bg pt-8 md:pt-12 pb-16 md:pb-24 border-t border-stroke/30">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-16 text-center">
           {STATS.map((stat, idx) => (

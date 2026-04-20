@@ -105,12 +105,12 @@ const Explorations: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative min-h-[150vh] bg-bg overflow-hidden flex flex-col items-center">
+    <section ref={containerRef} className="relative min-h-[120vh] bg-bg overflow-hidden flex flex-col items-center">
       
       {/* Central Floating Quote - Pinned */}
       <div 
         ref={quoteRef} 
-        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-center max-w-4xl px-10 pointer-events-none"
+        className="fixed top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-center max-w-4xl px-10 pointer-events-none"
       >
         <div className="flex items-center justify-center gap-4 mb-4 md:mb-6">
           <div className="w-8 h-[1px] bg-accent/30" />
@@ -125,7 +125,7 @@ const Explorations: React.FC = () => {
       </div>
 
       {/* Parallax Images Column Layout */}
-      <div className="relative z-0 w-full max-w-[1400px] mx-auto px-6 mt-[5vh] mb-[5vh]">
+      <div className="relative z-0 w-full max-w-[1400px] mx-auto px-6 mt-0 mb-[5vh]">
         <div className="grid grid-cols-2 gap-8 md:gap-32">
           
           {/* Left Column */}

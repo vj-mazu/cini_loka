@@ -30,14 +30,14 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
 
           {/* Modal Content */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="relative w-full max-w-5xl h-fit md:h-[min(850px,90vh)] bg-surface border border-white/10 rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl flex flex-col md:flex-row"
+            initial={{ opacity: 0, y: "100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 200 }}
+            className="relative w-full md:max-w-5xl h-full md:h-[min(850px,90vh)] bg-surface md:border border-white/10 md:rounded-[4rem] overflow-hidden shadow-2xl flex flex-col md:flex-row"
           >
             {/* Gallery Section */}
-            <div className="w-full md:w-1/2 aspect-[16/11] md:aspect-auto md:h-full relative bg-bg">
+            <div className="w-full md:w-1/2 h-[45vh] md:h-full flex-shrink-0 relative bg-bg">
               <div className="absolute inset-0 flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
                 {service.gallery.map((img, idx) => (
                   <div key={idx} className="min-w-full h-full snap-center">
@@ -53,21 +53,24 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
               {/* Close Button - Floating on mobile */}
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white md:hidden"
+                className="absolute top-6 right-6 z-20 w-12 h-12 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white md:hidden shadow-2xl"
               >
-                ✕
+                <span className="text-xl">✕</span>
               </button>
 
               {/* Image Indicators */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                 {service.gallery.map((_, idx) => (
-                  <div key={idx} className="w-1.5 h-1.5 rounded-full bg-white/40 border border-white/10" />
+                  <div key={idx} className="w-2 h-2 rounded-full bg-white/40 border border-white/10 shadow-sm" />
                 ))}
               </div>
+
+              {/* Gradient Overlay for text readability on image */}
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface via-transparent to-transparent md:hidden" />
             </div>
 
             {/* Info Section */}
-            <div className="flex-1 p-6 md:p-14 overflow-y-auto custom-scrollbar">
+            <div className="flex-1 p-6 md:p-14 overflow-y-auto custom-scrollbar bg-surface">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                   <span className="text-4xl">{service.icon}</span>
@@ -79,37 +82,37 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                 </div>
                 <button
                   onClick={onClose}
-                  className="hidden md:flex w-10 h-10 rounded-full bg-white/5 border border-white/10 items-center justify-center text-white hover:bg-white/10 transition-colors"
+                  className="hidden md:flex w-12 h-12 rounded-full bg-white/5 border border-white/10 items-center justify-center text-white hover:bg-white/10 transition-colors"
                 >
                   ✕
                 </button>
               </div>
 
-              <h2 className="text-4xl md:text-5xl font-display italic text-white mb-6 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-display italic text-white mb-6 leading-tight tracking-tighter">
                 {service.title}
               </h2>
 
-              <p className="text-muted text-base md:text-lg mb-10 leading-relaxed font-light">
+              <p className="text-muted text-sm md:text-lg mb-10 leading-relaxed font-light">
                 {service.description}
               </p>
 
               {/* Pricing & Features Grid */}
               <div className="grid grid-cols-1 gap-10 mb-12">
                 {/* Pricing */}
-                <div className="p-6 rounded-3xl bg-white/5 border border-white/5">
-                  <div className="text-xs text-muted uppercase tracking-[0.2em] mb-2 font-medium">Starting Price</div>
-                  <div className="text-4xl font-display italic text-accent">{service.price}</div>
-                  <div className="text-[10px] text-muted mt-2 tracking-wide">*Customization charges extra</div>
+                <div className="p-6 rounded-[2.5rem] bg-white/[0.03] border border-white/5 flex flex-col items-center text-center">
+                  <div className="text-[10px] text-muted uppercase tracking-[0.3em] mb-3 font-black">Starting Price</div>
+                  <div className="text-5xl font-display italic text-accent leading-none mb-2">{service.price}</div>
+                  <div className="text-[10px] text-muted tracking-wide opacity-50 uppercase font-bold">Standard Package</div>
                 </div>
 
                 {/* Features */}
                 <div>
-                  <div className="text-xs text-muted uppercase tracking-[0.2em] mb-6 font-medium">What's Included</div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="text-[10px] text-muted uppercase tracking-[0.3em] mb-6 font-black pl-2">What's Included</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                     {service.features.map((feat, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                        <span className="text-sm text-text-primary/80 font-medium">{feat}</span>
+                      <div key={i} className="flex items-center gap-4 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
+                        <div className="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
+                        <span className="text-xs md:text-sm text-text-primary/90 font-medium tracking-tight">{feat}</span>
                       </div>
                     ))}
                   </div>
@@ -117,17 +120,17 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
               </div>
 
               {/* Booking Actions */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 mt-auto">
                 <a
                   href={`https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20am%20interested%20in%20your%20${service.title}`}
                   target="_blank"
-                  className="flex-1 py-5 rounded-full bg-green-600 text-white font-bold text-sm tracking-tight flex items-center justify-center gap-3 hover:bg-green-700 transition-colors"
+                  className="flex-1 py-5 rounded-full bg-[#25D366] text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:brightness-110 active:scale-95 transition-all shadow-xl shadow-green-900/20"
                 >
-                  💬 WhatsApp to Book
+                  💬 WhatsApp Booking
                 </a>
                 <a
                   href="tel:+917483343412"
-                  className="flex-1 py-5 rounded-full bg-white text-bg font-bold text-sm tracking-tight flex items-center justify-center gap-3 hover:bg-surface transition-colors"
+                  className="flex-1 py-5 rounded-full bg-white text-bg font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-white/90 active:scale-95 transition-all shadow-xl"
                 >
                   📞 Call Now
                 </a>

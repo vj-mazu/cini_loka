@@ -10,6 +10,7 @@ interface ServiceModalProps {
     price: string;
     gallery: string[];
     features: string[];
+    packages?: { name: string; rate: string }[];
   } | null;
   onClose: () => void;
 }
@@ -39,13 +40,24 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
             {/* Gallery Section */}
             <div className="w-full md:w-1/2 h-[45vh] md:h-full flex-shrink-0 relative bg-bg">
               <div className="absolute inset-0 flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-                {service.gallery.map((img, idx) => (
+                {service.gallery.map((item, idx) => (
                   <div key={idx} className="min-w-full h-full snap-center">
-                    <img
-                      src={img}
-                      alt={`${service.title} gallery ${idx}`}
-                      className="w-full h-full object-cover"
-                    />
+                    {item.endsWith(".mp4") ? (
+                      <video
+                        src={item}
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      />
+                    ) : (
+                      <img
+                        src={item}
+                        alt={`${service.title} gallery ${idx}`}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
                   </div>
                 ))}
               </div>
@@ -70,7 +82,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
             </div>
 
             {/* Info Section */}
-            <div className="flex-1 p-6 md:p-14 overflow-y-auto custom-scrollbar bg-surface">
+            <div className="flex-1 p-6 md:p-14 overflow-y-auto custom-scrollbar bg-surface flex flex-col">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                   <span className="text-4xl">{service.icon}</span>
@@ -97,17 +109,29 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
               </p>
 
               {/* Pricing & Features Grid */}
-              <div className="grid grid-cols-1 gap-10 mb-12">
-                {/* Pricing */}
+              <div className="grid grid-cols-1 gap-8 mb-12">
+                {/* Starting Price */}
                 <div className="p-6 rounded-[2.5rem] bg-white/[0.03] border border-white/5 flex flex-col items-center text-center">
-                  <div className="text-[10px] text-muted uppercase tracking-[0.3em] mb-3 font-black">Starting Price</div>
+                  <div className="text-[10px] text-muted uppercase tracking-[0.3em] mb-2 font-black">Starting Price</div>
                   <div className="text-5xl font-display italic text-accent leading-none mb-2">{service.price}</div>
-                  <div className="text-[10px] text-muted tracking-wide opacity-50 uppercase font-bold">Standard Package</div>
+                  <div className="text-[10px] text-muted tracking-wide opacity-50 uppercase font-bold">Standard Entry</div>
                 </div>
 
+                {/* Specific Packages (if available) */}
+                {service.packages && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {service.packages.map((pkg, i) => (
+                      <div key={i} className="p-5 rounded-3xl bg-accent/5 border border-accent/10 flex flex-col items-center">
+                        <span className="text-[10px] text-accent/70 uppercase tracking-widest font-black mb-1">{pkg.name}</span>
+                        <span className="text-2xl font-display italic text-white">{pkg.rate}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 {/* Features */}
-                <div>
-                  <div className="text-[10px] text-muted uppercase tracking-[0.3em] mb-6 font-black pl-2">What's Included</div>
+                <div className="pt-4">
+                  <div className="text-[10px] text-muted uppercase tracking-[0.3em] mb-6 font-black pl-2">Experience Highlights</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                     {service.features.map((feat, i) => (
                       <div key={i} className="flex items-center gap-4 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
@@ -120,7 +144,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
               </div>
 
               {/* Booking Actions */}
-              <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+              <div className="flex flex-col sm:flex-row gap-4 mt-auto pt-8">
                 <a
                   href={`https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20am%20interested%20in%20your%20${service.title}`}
                   target="_blank"

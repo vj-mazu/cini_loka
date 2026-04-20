@@ -7,17 +7,27 @@ const SERVICES = [
     icon: "🎬",
     title: "Private Movie Screenings",
     description: "Enjoy your favorite movies or personal videos in our cozy, state-of-the-art private theater setting with premium surround sound.",
-    price: "₹1,499",
-    gallery: ["/assets/cini-1.jpg", "/assets/cini-2.jpg", "/assets/cini-3.jpg"],
+    price: "₹500",
+    gallery: [
+      "/assets/venue-video-1.mp4",
+      "/assets/venue-video-2.mp4",
+      "/assets/ai-movie-1.png",
+      "/assets/cini-1.jpg",
+      "/assets/cini-2.jpg"
+    ],
     features: ["4K HDR Projection", "7.1 Atmos Surround", "Premium Recliner Seating", "Fully Air Conditioned"],
+    packages: [
+      { name: "Couple Room", rate: "₹800/hr" },
+      { name: "Family Room", rate: "₹1,000/hr" }
+    ]
   },
   {
     id: "birthday",
     icon: "🎂",
     title: "Birthday Celebrations",
     description: "Create unforgettable birthday memories with our customizable decor packages, lighting setups, and personalized party themes.",
-    price: "₹2,499",
-    gallery: ["/assets/cini-2.jpg", "/assets/cini-4.jpg", "/assets/cini-1.jpg"],
+    price: "₹500",
+    gallery: ["/assets/ai-birthday-1.png", "/assets/venue-whatsapp-1.jpg", "/assets/cini-2.jpg", "/assets/cini-4.jpg", "/assets/cini-1.jpg"],
     features: ["Custom Decor Packages", "Ambient Lighting Controls", "Party Music System", "Outside Food Allowed"],
   },
   {
@@ -25,8 +35,8 @@ const SERVICES = [
     icon: "💍",
     title: "Anniversary & Weddings",
     description: "Celebrate your love story with elegant floral arrangements, decorative backdrops, draping, and romantic lighting.",
-    price: "₹3,499",
-    gallery: ["/assets/cini-3.jpg", "/assets/cini-1.jpg", "/assets/cini-2.jpg"],
+    price: "₹500",
+    gallery: ["/assets/ai-anniversary-1.png", "/assets/venue-whatsapp-1.jpg", "/assets/cini-3.jpg", "/assets/cini-1.jpg", "/assets/cini-2.jpg"],
     features: ["Romantic Floral Decor", "Personalized Welcome Screen", "Private Dining Setup", "Professional Photography Support"],
   },
   {
@@ -34,8 +44,8 @@ const SERVICES = [
     icon: "🏢",
     title: "Corporate Events",
     description: "Host professional meetings, team celebrations, and corporate gatherings in a sophisticated venue environment.",
-    price: "₹4,999",
-    gallery: ["/assets/cini-4.jpg", "/assets/cini-2.jpg", "/assets/cini-3.jpg"],
+    price: "₹500",
+    gallery: ["/assets/cini-4.jpg", "/assets/cini-2.jpg", "/assets/cini-3.jpg", "/assets/cini-1.jpg", "/assets/cini-2.jpg"],
     features: ["Presentation Equipment", "High-Speed Wifi", "Refreshment Support", "Flexible Seating Layouts"],
   },
   {
@@ -43,8 +53,8 @@ const SERVICES = [
     icon: "🎨",
     title: "Themed Party Design",
     description: "From table centerpieces to custom installations — we design bespoke themed experiences tailored to your vision.",
-    price: "₹1,999",
-    gallery: ["/assets/cini-1.jpg", "/assets/cini-3.jpg", "/assets/cini-4.jpg"],
+    price: "₹500",
+    gallery: ["/assets/cini-1.jpg", "/assets/cini-3.jpg", "/assets/cini-4.jpg", "/assets/cini-2.jpg", "/assets/cini-1.jpg"],
     features: ["Expert Consultation", "Custom Backdrop Design", "Props & Installation", "Theme-based Lighting"],
   },
   {
@@ -52,8 +62,8 @@ const SERVICES = [
     icon: "👶",
     title: "Kids-Friendly Experiences",
     description: "A safe, fun, and beautifully decorated space for children's parties with age-appropriate themes and activities.",
-    price: "₹1,499",
-    gallery: ["/assets/cini-2.jpg", "/assets/cini-4.jpg", "/assets/cini-3.jpg"],
+    price: "₹500",
+    gallery: ["/assets/cini-2.jpg", "/assets/cini-4.jpg", "/assets/cini-3.jpg", "/assets/cini-1.jpg", "/assets/cini-3.jpg"],
     features: ["Child-Safe Environment", "Colorful Themed Decor", "Animation/Cartoon Screenings", "Dedicated Soft Play Area"],
   },
 ];

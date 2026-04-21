@@ -61,11 +61,11 @@ const Hero: React.FC = () => {
           muted
           loop
           playsInline
-          className="absolute top-1/2 left-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-60"
+          className="absolute top-1/2 left-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-85"
         />
         {/* Multilayered Gradeints for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-bg/90 via-bg/20 to-bg" />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg via-transparent to-bg/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg/60 via-bg/10 to-bg" />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg/40 via-transparent to-bg/20" />
       </div>
 
       {/* Content */}

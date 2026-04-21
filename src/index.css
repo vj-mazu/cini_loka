@@ -5,13 +5,13 @@
   --font-display: "Instrument Serif", "Playfair Display", serif;
 
   /* Premium Luxury Color Palette */
-  --color-bg: hsl(0 0% 2%);
-  --color-surface: hsl(0 0% 5%);
-  --color-surface-elevated: hsl(0 0% 8%);
+  --color-bg: hsl(230 15% 4%); /* Deep Midnight Indigo */
+  --color-surface: hsl(230 15% 7%);
+  --color-surface-elevated: hsl(230 15% 10%);
   --color-text-primary: hsl(0 0% 98%);
-  --color-text-secondary: hsl(0 0% 70%);
-  --color-muted: hsl(0 0% 45%);
-  --color-stroke: hsl(0 0% 12%);
+  --color-text-secondary: hsl(0 0% 75%);
+  --color-muted: hsl(0 0% 50%);
+  --color-stroke: hsl(230 15% 12%);
   
   /* Luxury Accent (Gold/Bronze) */
   --color-accent: hsl(43 50% 50%); /* Sophisticated Gold */
@@ -53,6 +53,21 @@
     margin: 0;
     overflow-x: hidden;
     accent-color: var(--color-accent);
+    background-image: 
+      radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
+      radial-gradient(1.5px 1.5px at 90px 40px, #fff, rgba(0,0,0,0)),
+      radial-gradient(1.5px 1.5px at 130px 80px, #fff, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 160px 120px, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: stars-drift 100s linear infinite;
+  }
+
+  @keyframes stars-drift {
+    from { background-position: 0 0; }
+    to { background-position: 200px 200px; }
   }
 
   h1, h2, h3, h4, h5, h6 {

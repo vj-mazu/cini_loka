@@ -16,6 +16,14 @@ interface ServiceModalProps {
 }
 
 const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const constraintsRef = React.useRef(null);
+
+  // Reset index when service changes
+  React.useEffect(() => {
+    setCurrentIndex(0);
+  }, [service?.id]);
+
   // Body Scroll Lock
   React.useEffect(() => {
     if (service) {
@@ -50,10 +58,31 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
             className="relative w-full md:max-w-6xl h-full md:h-[85vh] glass md:border border-white/10 md:rounded-[4rem] overflow-hidden shadow-2xl flex flex-col md:flex-row"
           >
             {/* Gallery Section */}
-            <div className="w-full md:w-1/2 h-[45vh] md:h-full flex-shrink-0 relative overflow-hidden rounded-b-[3rem] md:rounded-l-[3.8rem] md:rounded-r-none">
-              <div className="absolute inset-0 flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide touch-pan-x">
+            <div 
+              ref={constraintsRef}
+              className="w-full md:w-1/2 h-[45vh] md:h-full flex-shrink-0 relative overflow-hidden rounded-b-[3rem] md:rounded-l-[3.8rem] md:rounded-r-none"
+            >
+              <motion.div 
+                className="flex h-full cursor-grab active:cursor-grabbing"
+                drag="x"
+                dragConstraints={constraintsRef}
+                dragElastic={0.1}
+                dragMomentum={false}
+                onDragEnd={(_, info) => {
+                  const threshold = 50;
+                  const velocityThreshold = 500;
+                  
+                  if (info.offset.x < -threshold || info.velocity.x < -velocityThreshold) {
+                    if (currentIndex < service.gallery.length - 1) setCurrentIndex(prev => prev + 1);
+                  } else if (info.offset.x > threshold || info.velocity.x > velocityThreshold) {
+                    if (currentIndex > 0) setCurrentIndex(prev => prev - 1);
+                  }
+                }}
+                animate={{ x: `-${currentIndex * 100}%` }}
+                transition={{ type: "spring", damping: 30, stiffness: 200 }}
+              >
                 {service.gallery.map((item, idx) => (
-                  <div key={idx} className="min-w-full h-full snap-start relative">
+                  <div key={idx} className="min-w-full h-full relative">
                     {item.endsWith(".mp4") ? (
                       <video
                         src={item}
@@ -74,19 +103,35 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                     )}
                   </div>
                 ))}
-              </div>
-...
+              </motion.div>
+
+              {/* Side Navigation Overlays */}
+              <div className="absolute inset-y-0 left-0 w-1/4 z-10 cursor-pointer" onClick={(e) => {
+                e.stopPropagation();
+                if (currentIndex > 0) setCurrentIndex(prev => prev - 1);
+              }} />
+              <div className="absolute inset-y-0 right-0 w-1/4 z-10 cursor-pointer" onClick={(e) => {
+                e.stopPropagation();
+                if (currentIndex < service.gallery.length - 1) setCurrentIndex(prev => prev + 1);
+              }} />
               
               <button
                 onClick={onClose}
-                className="absolute top-8 right-8 z-20 w-14 h-14 rounded-full glass hover:bg-white/10 flex items-center justify-center text-white md:hidden shadow-2xl transition-all duration-300"
+                className="absolute top-8 right-8 z-30 w-14 h-14 rounded-full glass hover:bg-white/10 flex items-center justify-center text-white md:hidden shadow-2xl transition-all duration-300"
               >
                 <span className="text-2xl">✕</span>
               </button>
 
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-30">
                 {service.gallery.map((_, idx) => (
-                  <div key={idx} className="w-2 h-2 rounded-full bg-white/30 border border-white/10" />
+                  <button 
+                    key={idx}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`h-1.5 transition-all duration-500 rounded-full cursor-pointer p-0 border-none outline-none ${
+                      idx === currentIndex ? "w-8 bg-accent shadow-[0_0_15px_rgba(226,194,133,0.5)]" : "w-1.5 bg-white/20 hover:bg-white/40"
+                    }`} 
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
                 ))}
               </div>
 

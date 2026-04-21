@@ -41,11 +41,12 @@ const REVIEWS = [
 ];
 
 const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
-  <div className="flex gap-0.5">
+  <div className="flex gap-1">
     {[1, 2, 3, 4, 5].map((star) => (
       <span
         key={star}
-        className={`text-sm ${star <= rating ? "text-yellow-400" : "text-stroke"}`}
+        className={`text-sm ${star <= rating ? "gold-gradient bg-clip-text text-transparent" : "text-white/10"}`}
+        style={{ textShadow: star <= rating ? "0 0 10px rgba(226, 194, 133, 0.4)" : "none" }}
       >
         ★
       </span>
@@ -55,46 +56,55 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
 
 const Reviews: React.FC = () => {
   return (
-    <section className="bg-bg pt-16 md:pt-24 pb-0 border-t border-stroke/20">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-        {/* Header */}
+    <section className="bg-bg py-24 md:py-32 border-t border-white/5 relative overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 w-1/2 h-1/2 bg-accent/5 blur-[150px] rounded-full -translate-x-1/2 -translate-y-1/2" />
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-16 md:mb-20"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20 md:mb-24"
         >
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-[1.5px] bg-stroke/50" />
-              <span className="text-[10px] text-muted uppercase tracking-[0.4em] font-black">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-5 mb-8">
+              <div className="w-16 h-[1.5px] bg-accent/30" />
+              <span className="text-[11px] text-accent tracking-[0.6em] font-bold uppercase opacity-80">
                 Testimonials
               </span>
             </div>
-            <h2 className="text-5xl md:text-8xl font-display italic text-text-primary leading-[0.9] tracking-tighter">
-              What People <span className="text-white/30">Say</span>
+            <h2 className="text-6xl md:text-8xl lg:text-9xl font-display italic leading-[0.85] tracking-tighter">
+              <span className="text-white/20">Guest</span> <span className="gold-gradient">Stories</span>
             </h2>
-            <p className="text-muted text-base md:text-lg max-w-lg mt-8 leading-relaxed font-light">
-              Rated 4.8 stars from 21+ verified Google reviews. Real experiences
-              from our valued guests.
+            <p className="text-text-secondary text-lg md:text-xl max-w-xl mt-10 leading-relaxed font-light">
+              Exceptional moments shared by our guests. Rated 4.8 stars from 
+              21+ verified Google reviews in Raichur.
             </p>
           </div>
 
-          {/* Overall Rating Badge */}
-          <div className="flex flex-col items-center gap-3 bg-surface/30 border border-stroke/50 rounded-[2rem] px-10 py-8">
-            <span className="text-6xl font-display italic text-text-primary leading-none">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center gap-4 glass-dark p-10 md:p-12 rounded-[3.5rem] border border-accent/20 shadow-[0_0_50px_rgba(226,194,133,0.1)] hover:shadow-accent/20 transition-all duration-1000 group relative"
+          >
+            <div className="absolute inset-0 bg-accent/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <span className="text-7xl md:text-8xl font-display italic gold-gradient leading-none relative z-10">
               4.8
             </span>
-            <StarRating rating={5} />
-            <span className="text-[10px] text-muted tracking-[0.3em] uppercase font-black mt-1">
-              Google Reviews
+            <div className="relative z-10">
+              <StarRating rating={5} />
+            </div>
+            <span className="text-[10px] text-accent tracking-[0.5em] uppercase font-bold mt-2 opacity-80 relative z-10">
+              Google Verified
             </span>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {REVIEWS.map((review, idx) => (
             <motion.div
               key={idx}
@@ -106,51 +116,54 @@ const Reviews: React.FC = () => {
                 delay: idx * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="group bg-surface/20 hover:bg-surface/50 border border-stroke/30 hover:border-stroke rounded-[2.5rem] p-10 transition-all duration-700"
+              className="group glass rounded-[2.8rem] p-12 transition-all duration-700 hover:bg-white/[0.08]"
             >
-              {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-bg font-bold text-sm shrink-0">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-5">
+                  <div className="w-14 h-14 rounded-full gold-gradient shadow-lg flex items-center justify-center text-white font-bold text-sm">
                     {review.name.split(" ").map((n) => n[0]).join("")}
                   </div>
-                  <h4 className="text-text-primary font-medium text-base">
-                    {review.name}
-                  </h4>
+                  <div>
+                    <h4 className="text-text-primary font-medium text-lg leading-none mb-2">
+                      {review.name}
+                    </h4>
+                    <span className="text-[10px] text-accent uppercase tracking-[0.2em] font-bold opacity-60">
+                      {review.event}
+                    </span>
+                  </div>
                 </div>
+              </div>
+
+              <div className="mb-6">
                 <StarRating rating={review.rating} />
               </div>
 
-              {/* Event Badge */}
-              <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-stroke/30 mb-5">
-                <span className="text-[9px] text-accent font-black tracking-[0.2em] uppercase">
-                  {review.event}
-                </span>
-              </div>
-
-              {/* Review Text */}
-              <p className="text-muted text-sm leading-relaxed font-light">
+              <p className="text-text-secondary text-base leading-relaxed font-light italic group-hover:text-text-primary transition-colors duration-500">
                 "{review.text}"
               </p>
+              
+              <div className="mt-8 pt-8 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                <div className="w-8 h-[1px] gold-gradient" />
+              </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Google review link */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="mt-16 flex justify-center"
+          className="mt-20 flex justify-center"
         >
           <a
             href="https://www.google.com/maps/place/CINI+LOKA/@16.2024,76.5856,17z"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-4 px-10 py-5 rounded-full border border-stroke text-[10px] font-black tracking-[0.2em] uppercase hover:bg-white hover:text-bg transition-all duration-500"
+            className="group inline-flex items-center gap-6 px-12 py-6 rounded-full border border-white/10 glass-dark text-[11px] font-bold tracking-[0.3em] uppercase hover:bg-white hover:text-bg transition-all duration-700"
           >
-            See All Reviews on Google Maps →
+            <span>Explore All Guest Feedback</span>
+            <span className="group-hover:translate-x-2 transition-transform duration-500">→</span>
           </a>
         </motion.div>
       </div>

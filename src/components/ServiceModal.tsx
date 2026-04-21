@@ -16,10 +16,22 @@ interface ServiceModalProps {
 }
 
 const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
+  // Body Scroll Lock
+  React.useEffect(() => {
+    if (service) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [service]);
+
   return (
     <AnimatePresence>
       {service && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 md:p-10">
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-0 md:p-10">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -35,13 +47,13 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="relative w-full md:max-w-6xl h-full md:h-[85vh] glass md:border border-white/10 md:rounded-[4rem] overflow-hidden shadow-2xl flex flex-col md:flex-row p-2"
+            className="relative w-full md:max-w-6xl h-full md:h-[85vh] glass md:border border-white/10 md:rounded-[4rem] overflow-hidden shadow-2xl flex flex-col md:flex-row"
           >
             {/* Gallery Section */}
-            <div className="w-full md:w-1/2 h-[40vh] md:h-full flex-shrink-0 relative overflow-hidden rounded-[3rem]">
-              <div className="absolute inset-0 flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+            <div className="w-full md:w-1/2 h-[45vh] md:h-full flex-shrink-0 relative overflow-hidden rounded-b-[3rem] md:rounded-l-[3.8rem] md:rounded-r-none">
+              <div className="absolute inset-0 flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide touch-pan-x">
                 {service.gallery.map((item, idx) => (
-                  <div key={idx} className="min-w-full h-full snap-center">
+                  <div key={idx} className="min-w-full h-full snap-start relative">
                     {item.endsWith(".mp4") ? (
                       <video
                         src={item}
@@ -63,6 +75,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                   </div>
                 ))}
               </div>
+...
               
               <button
                 onClick={onClose}

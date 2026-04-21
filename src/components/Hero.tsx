@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center max-w-6xl pt-32 md:pt-0">
+      <div className="relative z-10 container mx-auto px-6 text-center max-w-6xl pt-48 md:pt-64">
         <div className="blur-in inline-block text-[11px] md:text-xs lg:text-sm text-accent tracking-[0.4em] md:tracking-[0.6em] mb-12 md:mb-16 font-bold opacity-100 uppercase border-b border-accent/30 pb-6">
           Elite Private Cinema & Events
         </div>

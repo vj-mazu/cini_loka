@@ -18,7 +18,7 @@ interface ServiceModalProps {
 
 const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  const constraintsRef = React.useRef(null);
+  const constraintsRef = React.useRef<HTMLDivElement>(null);
 
   // Reset index when service changes
   React.useEffect(() => {

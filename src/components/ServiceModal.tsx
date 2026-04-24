@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Magnetic from "./Magnetic";
 
 interface ServiceModalProps {
   service: {
@@ -51,38 +52,28 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
 
           {/* Modal Content */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="relative w-full md:max-w-6xl h-full md:h-[85vh] glass md:border border-white/10 md:rounded-[4rem] overflow-hidden shadow-2xl flex flex-col md:flex-row"
+            initial={{ scale: 0.9, opacity: 0, y: 30 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-full max-w-7xl h-[92vh] md:h-[85vh] lg:h-[82vh] glass rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-2xl border border-white/10"
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Gallery Section */}
             <div 
-              ref={constraintsRef}
-              className="w-full md:w-1/2 h-[45vh] md:h-full flex-shrink-0 relative overflow-hidden rounded-b-[3rem] md:rounded-l-[3.8rem] md:rounded-r-none"
+              className="w-full md:w-1/2 h-[45vh] md:h-full flex-shrink-0 relative group/gallery"
             >
-              <motion.div 
-                className="flex h-full cursor-grab active:cursor-grabbing"
-                drag="x"
-                dragConstraints={constraintsRef}
-                dragElastic={0.1}
-                dragMomentum={false}
-                onDragEnd={(_, info) => {
-                  const threshold = 50;
-                  const velocityThreshold = 500;
-                  
-                  if (info.offset.x < -threshold || info.velocity.x < -velocityThreshold) {
-                    if (currentIndex < service.gallery.length - 1) setCurrentIndex(prev => prev + 1);
-                  } else if (info.offset.x > threshold || info.velocity.x > velocityThreshold) {
-                    if (currentIndex > 0) setCurrentIndex(prev => prev - 1);
-                  }
+              <div 
+                ref={constraintsRef}
+                className="flex h-full overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
+                onScroll={(e) => {
+                  const target = e.currentTarget;
+                  const index = Math.round(target.scrollLeft / target.clientWidth);
+                  if (index !== currentIndex) setCurrentIndex(index);
                 }}
-                animate={{ x: `-${currentIndex * 100}%` }}
-                transition={{ type: "spring", damping: 30, stiffness: 200 }}
               >
                 {service.gallery.map((item, idx) => (
-                  <div key={idx} className="min-w-full h-full relative">
+                  <div key={idx} className="min-w-full h-full snap-start snap-always relative flex-shrink-0">
                     {item.endsWith(".mp4") ? (
                       <video
                         src={item}
@@ -97,124 +88,168 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                       <img
                         src={item}
                         alt={`${service.title} gallery ${idx}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover select-none"
                         loading="lazy"
+                        draggable="false"
                       />
                     )}
                   </div>
                 ))}
-              </motion.div>
+              </div>
 
-              {/* Side Navigation Overlays */}
-              <div className="absolute inset-y-0 left-0 w-1/4 z-10 cursor-pointer" onClick={(e) => {
-                e.stopPropagation();
-                if (currentIndex > 0) setCurrentIndex(prev => prev - 1);
-              }} />
-              <div className="absolute inset-y-0 right-0 w-1/4 z-10 cursor-pointer" onClick={(e) => {
-                e.stopPropagation();
-                if (currentIndex < service.gallery.length - 1) setCurrentIndex(prev => prev + 1);
-              }} />
+              {/* Navigation Arrows (Visible on hover) */}
+              <div className="absolute inset-0 pointer-events-none flex items-center justify-between px-6 opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-500">
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const container = constraintsRef.current;
+                    if (container) container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
+                  }}
+                  className={`w-12 h-12 rounded-full glass flex items-center justify-center text-white pointer-events-auto transition-transform hover:scale-110 active:scale-95 ${currentIndex === 0 ? "opacity-20 cursor-not-allowed" : "opacity-100"}`}
+                >
+                  ←
+                </button>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const container = constraintsRef.current;
+                    if (container) container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+                  }}
+                  className={`w-12 h-12 rounded-full glass flex items-center justify-center text-white pointer-events-auto transition-transform hover:scale-110 active:scale-95 ${currentIndex === service.gallery.length - 1 ? "opacity-20 cursor-not-allowed" : "opacity-100"}`}
+                >
+                  →
+                </button>
+              </div>
               
-              <button
-                onClick={onClose}
-                className="absolute top-8 right-8 z-30 w-14 h-14 rounded-full glass hover:bg-white/10 flex items-center justify-center text-white md:hidden shadow-2xl transition-all duration-300"
-              >
-                <span className="text-2xl">✕</span>
-              </button>
-
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+              {/* Pagination Dots */}
+              <div className="absolute bottom-10 left-0 right-0 flex justify-center items-center gap-2 z-30 pointer-events-none">
                 {service.gallery.map((_, idx) => (
-                  <button 
+                  <div 
                     key={idx}
-                    onClick={() => setCurrentIndex(idx)}
-                    className={`h-1.5 transition-all duration-500 rounded-full cursor-pointer p-0 border-none outline-none ${
-                      idx === currentIndex ? "w-8 bg-accent shadow-[0_0_15px_rgba(226,194,133,0.5)]" : "w-1.5 bg-white/20 hover:bg-white/40"
+                    className={`transition-all duration-500 rounded-full h-1 ${
+                      idx === currentIndex 
+                        ? "w-10 bg-accent shadow-[0_0_15px_rgba(226,194,133,0.5)]" 
+                        : "w-2 bg-white/20"
                     }`} 
-                    aria-label={`Go to slide ${idx + 1}`}
                   />
                 ))}
               </div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-bg/60 via-transparent to-transparent md:hidden" />
+              {/* Swipe Hint */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: currentIndex === 0 ? 1 : 0 }}
+                className="absolute bottom-16 left-1/2 -translate-x-1/2 text-[10px] text-white/40 uppercase tracking-[0.4em] font-bold pointer-events-none"
+              >
+                Swipe to Explore
+              </motion.div>
+
+              <div className="absolute inset-0 bg-gradient-to-t from-bg/60 via-transparent to-transparent md:hidden pointer-events-none" />
             </div>
 
             {/* Info Section */}
-            <div className="flex-1 p-8 md:p-16 overflow-y-auto custom-scrollbar flex flex-col">
-              <div className="flex items-center justify-between mb-10">
-                <div className="flex items-center gap-5">
-                  <span className="text-5xl">{service.icon}</span>
-                  <div className="px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20">
-                    <span className="text-accent text-[11px] font-bold uppercase tracking-[0.4em]">
-                      Signature Level
-                    </span>
+            <div className="flex-1 p-6 md:p-8 lg:p-12 overflow-hidden h-full">
+              <div className="h-full flex flex-col md:flex-row gap-8 lg:gap-12">
+                
+                {/* Left Side: Basic Info */}
+                <div className="w-full md:w-[42%] flex flex-col items-start text-left min-h-0">
+                  <div className="flex items-center gap-3 mb-3 md:mb-4 flex-shrink-0">
+                    <span className="text-xl md:text-2xl">{service.icon}</span>
+                    <div className="px-2.5 py-1 rounded-full bg-accent/5 border border-accent/10">
+                      <span className="text-accent text-[8px] font-bold uppercase tracking-[0.4em]">
+                        Signature
+                      </span>
+                    </div>
+                  </div>
+
+                  <h2 className="text-2xl md:text-4xl lg:text-5xl font-display italic leading-tight tracking-tighter mb-4 md:mb-6 gold-gradient text-left w-full flex-shrink-0">
+                    {service.title}
+                  </h2>
+
+                  <div className="overflow-y-auto custom-scrollbar-hidden mb-6 flex-grow">
+                    <p className="text-text-secondary text-sm md:text-base lg:text-lg leading-relaxed font-light opacity-90 text-left w-full">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  {/* Desktop Booking Actions */}
+                  <div className="hidden md:flex flex-col gap-2.5 w-full mt-auto pt-4 flex-shrink-0">
+                    <Magnetic>
+                      <a
+                        href={`https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20am%20interested%20in%20your%20${service.title}`}
+                        target="_blank"
+                        className="w-full py-3.5 rounded-full gold-gradient text-white font-bold text-[9px] uppercase tracking-[0.3em] flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] transition-transform"
+                      >
+                        💬 Book Experience
+                      </a>
+                    </Magnetic>
+                    <Magnetic>
+                      <a
+                        href="tel:+917483343412"
+                        className="w-full py-3.5 rounded-full glass text-white font-bold text-[9px] uppercase tracking-[0.3em] flex items-center justify-center gap-2 hover:bg-white/5 transition-all"
+                      >
+                        📞 Direct Inquiries
+                      </a>
+                    </Magnetic>
                   </div>
                 </div>
+
+                {/* Right Side: Compact Pricing & Features */}
+                <div className="w-full md:w-[58%] flex flex-col overflow-y-auto custom-scrollbar md:pr-2">
+                  <div className="p-6 rounded-[2rem] bg-white/[0.03] border border-white/5 flex flex-col items-center text-center mb-6 flex-shrink-0">
+                    <span className="text-[9px] text-accent uppercase tracking-[0.6em] mb-2 font-bold">Base Rate</span>
+                    <div className="text-4xl md:text-5xl lg:text-6xl font-display italic text-white leading-none">{service.price}</div>
+                  </div>
+
+                  {service.packages && (
+                    <div className="grid grid-cols-2 gap-2.5 mb-5">
+                      {service.packages.map((pkg, i) => (
+                        <div key={i} className="p-3.5 rounded-[1.2rem] glass border border-white/5 text-center group hover:bg-white/[0.05] transition-all">
+                          <span className="text-[6px] text-accent uppercase tracking-[0.3em] font-black block mb-1 opacity-60">{pkg.name}</span>
+                          <span className="text-base md:text-lg font-display italic text-white leading-none group-hover:gold-gradient transition-all">{pkg.rate}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="mb-6 flex-grow">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-8 h-[1px] bg-accent/30" />
+                      <span className="text-[10px] text-white/50 uppercase tracking-[0.5em] font-bold">Highlights</span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-y-4">
+                      {service.features.map((feat, i) => (
+                        <div key={i} className="flex items-start gap-4">
+                          <div className="w-1.5 h-1.5 rounded-full bg-accent/60 mt-1.5 flex-shrink-0" />
+                          <span className="text-sm md:text-base lg:text-lg text-text-primary/90 font-light tracking-tight leading-relaxed">
+                            {feat}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Mobile Booking Actions */}
+                  <div className="flex flex-col gap-2.5 md:hidden pb-4">
+                    <Magnetic>
+                      <a
+                        href={`https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20am%20interested%20in%20your%20${service.title}`}
+                        target="_blank"
+                        className="w-full py-3.5 rounded-full gold-gradient text-white font-bold text-[9px] uppercase tracking-[0.3em] flex items-center justify-center gap-2"
+                      >
+                        💬 Book Now
+                      </a>
+                    </Magnetic>
+                  </div>
+                </div>
+
+                {/* Close Button */}
                 <button
                   onClick={onClose}
-                  className="hidden md:flex w-14 h-14 rounded-full glass hover:bg-white/10 items-center justify-center text-white transition-all duration-300 transform hover:rotate-90"
+                  className="absolute top-6 right-6 md:top-8 md:right-8 w-10 h-10 rounded-full glass hover:bg-white/10 flex items-center justify-center text-white transition-all transform hover:rotate-90 z-50"
                 >
                   ✕
                 </button>
-              </div>
-
-              <h2 className="text-4xl md:text-6xl font-display italic leading-tight tracking-tighter mb-8 gold-gradient">
-                {service.title}
-              </h2>
-
-              <p className="text-text-secondary text-base md:text-xl mb-12 leading-relaxed font-light">
-                {service.description}
-              </p>
-
-              {/* Pricing & Features Grid */}
-              <div className="grid grid-cols-1 gap-12 mb-12">
-                <div className="p-10 rounded-[3rem] bg-white/[0.04] border border-white/5 flex flex-col items-center text-center shadow-xl">
-                  <div className="text-[10px] text-accent uppercase tracking-[0.6em] mb-4 font-black">Experience Baseline</div>
-                  <div className="text-6xl md:text-7xl font-display italic text-white leading-none mb-4">{service.price}</div>
-                  <div className="text-[11px] text-text-secondary tracking-widest uppercase font-medium opacity-50">Base Package Rates</div>
-                </div>
-
-                {service.packages && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {service.packages.map((pkg, i) => (
-                      <div key={i} className="p-8 rounded-[2.5rem] glass hover:bg-white/[0.08] transition-all duration-500 border border-white/5 group">
-                        <span className="text-[10px] text-accent uppercase tracking-[0.5em] font-black block mb-2">{pkg.name}</span>
-                        <span className="text-3xl font-display italic text-white group-hover:gold-gradient transition-all duration-500">{pkg.rate}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                <div className="pt-4">
-                  <div className="flex items-center gap-5 mb-10">
-                    <div className="w-12 h-[1px] gold-gradient" />
-                    <span className="text-[11px] text-white uppercase tracking-[0.6em] font-bold">Experience Highlights</span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-12">
-                    {service.features.map((feat, i) => (
-                      <div key={i} className="flex items-center gap-5 group">
-                        <div className="w-2 h-2 rounded-full gold-gradient shadow-[0_0_15px_rgba(226,194,133,0.5)] group-hover:scale-125 transition-transform duration-500" />
-                        <span className="text-sm md:text-base text-text-secondary group-hover:text-text-primary transition-colors duration-500 font-light tracking-tight">{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Booking Actions */}
-              <div className="flex flex-col sm:flex-row gap-6 mt-auto pt-10">
-                <a
-                  href={`https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20am%20interested%20in%20your%20${service.title}`}
-                  target="_blank"
-                  className="flex-1 py-6 rounded-full gold-gradient text-white font-bold text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 transition-all duration-500 hover:scale-[1.02] shadow-2xl active:scale-95"
-                >
-                  💬 Book Experience
-                </a>
-                <a
-                  href="tel:+917483343412"
-                  className="flex-1 py-6 rounded-full glass text-white font-bold text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 transition-all duration-500 hover:bg-white/10 active:scale-95 shadow-xl"
-                >
-                  📞 Direct Inquiries
-                </a>
               </div>
             </div>
           </motion.div>

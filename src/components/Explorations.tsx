@@ -38,7 +38,7 @@ const Explorations: React.FC = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 40%",
+          start: "top 65%",
           end: "top 10%",
           scrub: 1.5,
         }
@@ -106,12 +106,12 @@ const Explorations: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative min-h-[100vh] bg-bg overflow-hidden flex flex-col items-center py-24">
+    <section id="gallery" ref={containerRef} className="relative min-h-[150vh] bg-bg overflow-hidden flex flex-col items-center py-32 md:py-48">
       
-      {/* Central Floating Quote - Pinned */}
+      {/* Central Floating Quote - Pinned via GSAP, not CSS fixed */}
       <div 
         ref={quoteRef} 
-        className="fixed top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-center max-w-5xl px-10 pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-center max-w-7xl px-10 pointer-events-none opacity-0"
       >
         <div className="flex items-center justify-center gap-6 mb-8">
           <div className="w-12 h-[1px] gold-gradient" />
@@ -120,8 +120,8 @@ const Explorations: React.FC = () => {
           </span>
           <div className="w-12 h-[1px] gold-gradient" />
         </div>
-        <h2 className="text-4xl md:text-8xl lg:text-9xl font-display italic text-text-primary leading-[0.85] tracking-tighter">
-          "Where every <span className="gold-gradient">moment</span> becomes a <span className="text-white/20">cinematic</span> masterpiece."
+        <h2 className="text-4xl md:text-8xl lg:text-[10rem] font-display italic text-text-primary leading-[1.05] tracking-tighter">
+          "Where every <span className="gold-gradient">moment</span> becomes a <span className="text-white/40">cinematic</span> masterpiece."
         </h2>
       </div>
 

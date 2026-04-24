@@ -10,7 +10,7 @@ const STATS = [
 
 const Stats: React.FC = () => {
   return (
-    <section className="bg-bg py-24 md:py-32 border-t border-white/5 relative overflow-hidden">
+    <section id="stats" className="bg-bg py-24 md:py-32 border-t border-white/5 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent opacity-30" />
       
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
@@ -30,8 +30,13 @@ const Stats: React.FC = () => {
                 {/* Background Glow */}
                 <div className="absolute inset-0 bg-accent/5 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                 
-                <span className="text-8xl md:text-9xl lg:text-[11rem] font-display italic gold-gradient tracking-tighter leading-[0.8] group-hover:scale-105 transition-transform duration-1000 select-none relative z-10">
-                  {stat.value}
+                <span className="text-7xl md:text-8xl lg:text-[10rem] font-display italic gold-gradient tracking-tight group-hover:scale-105 transition-transform duration-1000 select-none relative z-10 px-4">
+                  {stat.value.includes('+') ? (
+                    <span className="flex items-center justify-center">
+                      {stat.value.replace('+', '')}
+                      <span className="ml-2 text-6xl md:text-7xl lg:text-9xl text-accent/80">+</span>
+                    </span>
+                  ) : stat.value}
                 </span>
                 <span className="text-[11px] md:text-xs text-text-secondary uppercase tracking-[0.6em] font-bold group-hover:text-white group-hover:tracking-[0.8em] transition-all duration-700 relative z-10">
                   {stat.label}

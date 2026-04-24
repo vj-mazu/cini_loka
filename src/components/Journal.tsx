@@ -12,7 +12,7 @@ const ENTRIES = [
     title: "Cinematic Luxury in raichur city",
     date: "APR 15, 2026",
     readTime: "6 MIN READ",
-    image: "/assets/cini-2.jpg"
+    image: "/assets/user_images/image2.jpg"
   },
   {
     title: "The Power of Atmosphere & Decor",

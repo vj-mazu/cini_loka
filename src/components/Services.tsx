@@ -6,19 +6,22 @@ const SERVICES = [
     id: "movie",
     icon: "🎬",
     title: "Private Movie Screenings",
-    description: "Enjoy your favorite movies or personal videos in our cozy chair environment with premium surround sound. Perfect for couples and families.",
+    description: "Enjoy your favorite movies or personal videos in our cozy luxury sofa environment with premium surround sound. Perfect for couples and families.",
     price: "₹500",
     gallery: [
+      "/assets/user_images/image6.jpg",
+      "/assets/user_images/image7.jpg",
       "/assets/ai-movie-1.png",
       "/assets/cini-1.jpg",
       "/assets/cini-2.jpg",
       "/assets/cini-3.jpg",
       "/assets/cini-4.jpg"
     ],
-    features: ["4K HDR Projection", "7.1 Atmos Surround", "Premium Recliner Seating", "Fully Air Conditioned"],
+    features: ["4K HDR Projection", "7.1 Atmos Surround", "Premium Luxury Sofa Seating", "Fully Air Conditioned"],
     packages: [
-      { name: "Couple Room", rate: "₹800/hr" },
-      { name: "Family Room", rate: "₹1,000/hr" }
+      { name: "Couple Room", rate: "₹1,000 / 3 hrs" },
+      { name: "Family Room", rate: "₹1,300 / 3 hrs" },
+      { name: "Birthday Special", rate: "Decor + Screening" }
     ]
   },
   {
@@ -28,6 +31,9 @@ const SERVICES = [
     description: "Create unforgettable birthday memories with our customizable decor. Pricing starts from ₹500.",
     price: "₹500",
     gallery: [
+      "/assets/user_images/image3.jpg",
+      "/assets/user_images/image4.jpg",
+      "/assets/user_images/image5.jpg",
       "/assets/venue-video-1.mp4",
       "/assets/venue-video-2.mp4",
       "/assets/bday-custom-1.jpg",
@@ -35,7 +41,12 @@ const SERVICES = [
       "/assets/cini-2.jpg",
       "/assets/cini-4.jpg"
     ],
-    features: ["Custom Decor Packages", "Ambient Lighting Controls", "Party Music System", "Outside Food Allowed"],
+    features: ["Custom Decor Packages", "Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)"],
+    packages: [
+      { name: "Couple Birthday", rate: "₹800" },
+      { name: "Family Birthday", rate: "₹1,000" },
+      { name: "Birthday + Movie", rate: "Special Rates" }
+    ]
   },
   {
     id: "anniversary",
@@ -43,13 +54,12 @@ const SERVICES = [
     title: "Anniversary & Weddings",
     description: "Celebrate your love story with elegant romantic setups. Exclusive themes available.",
     price: "₹500",
+    features: ["Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)", "Romantic Floral Decor"],
     gallery: [
       "/assets/anni-custom-1.png",
       "/assets/anni-custom-2.jpg",
-      "/assets/anni-custom-3.png",
-      "/assets/ai-anniversary-1.png"
+      "/assets/anni-custom-3.png"
     ],
-    features: ["Romantic Floral Decor", "Personalized Welcome Screen", "Private Dining Setup", "Professional Photography Support"],
   },
   {
     id: "corporate",
@@ -64,10 +74,16 @@ const SERVICES = [
     id: "themed",
     icon: "🎨",
     title: "Themed Party Design",
-    description: "Bespoke themed experiences tailored to your vision.",
+    description: "Bespoke themed experiences tailored to your vision. Specialized in Matured Functions and elegant setups.",
     price: "₹500",
-    gallery: ["/assets/cini-1.jpg", "/assets/cini-4.jpg", "/assets/cini-2.jpg"],
-    features: ["Expert Consultation", "Custom Backdrop Design", "Theme-based Lighting"],
+    gallery: [
+      "/assets/user_images/image1.jpg",
+      "/assets/user_images/image2.jpg",
+      "/assets/cini-1.jpg",
+      "/assets/cini-4.jpg",
+      "/assets/cini-2.jpg"
+    ],
+    features: ["Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)", "Matured Function Themes"],
   },
   {
     id: "kids",
@@ -75,18 +91,23 @@ const SERVICES = [
     title: "Kids-Friendly Experiences",
     description: "A safe, fun, and beautifully decorated space for children's parties.",
     price: "₹500",
-    gallery: ["/assets/cini-2.jpg", "/assets/bday-custom-2.jpg", "/assets/cini-1.jpg"],
+    gallery: ["/assets/user_images/image6.jpg", "/assets/cini-2.jpg", "/assets/bday-custom-2.jpg", "/assets/cini-1.jpg"],
     features: ["Child-Safe Environment", "Colorful Themed Decor", "Cartoon Screenings"],
   },
 ];
 
 import ServiceModal from "./ServiceModal";
 
-const Services: React.FC = () => {
-  const [selectedService, setSelectedService] = useState<typeof SERVICES[0] | null>(null);
+interface ServicesProps {
+  selectedServiceId: string | null;
+  onServiceSelect: (id: string | null) => void;
+}
+
+const Services: React.FC<ServicesProps> = ({ selectedServiceId, onServiceSelect }) => {
+  const selectedService = SERVICES.find(s => s.id === selectedServiceId) || null;
 
   return (
-    <section className="bg-bg py-24 md:py-32 border-t border-white/5 relative overflow-hidden">
+    <section id="services" className="bg-bg py-24 md:py-32 border-t border-white/5 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-accent/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
       
@@ -128,7 +149,7 @@ const Services: React.FC = () => {
                 delay: idx * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              onClick={() => setSelectedService(service)}
+              onClick={() => onServiceSelect(service.id)}
               className="group relative glass rounded-[3rem] p-12 md:p-14 transition-all duration-700 cursor-pointer hover:bg-white/[0.08] hover:border-white/20"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[3rem]" />
@@ -207,7 +228,7 @@ const Services: React.FC = () => {
 
       <ServiceModal 
         service={selectedService} 
-        onClose={() => setSelectedService(null)} 
+        onClose={() => onServiceSelect(null)} 
       />
     </section>
   );

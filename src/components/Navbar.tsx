@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Magnetic from "./Magnetic";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,15 +24,17 @@ const Navbar: React.FC = () => {
         }`}
       >
         {/* Logo */}
-        <motion.div 
-          className="relative w-9 h-9 md:w-11 md:h-11 rounded-full overflow-hidden group cursor-pointer p-[1px] flex-shrink-0"
-          whileHover={{ scale: 1.05 }}
-        >
-          <div className="absolute inset-0 gold-gradient group-hover:rotate-180 transition-transform duration-1000" />
-          <div className="w-full h-full bg-bg rounded-full flex items-center justify-center relative z-10">
-            <span className="font-display italic text-[10px] md:text-xs font-bold text-text-primary tracking-tighter gold-gradient">CL</span>
-          </div>
-        </motion.div>
+        <Magnetic>
+          <motion.div 
+            className="relative w-9 h-9 md:w-11 md:h-11 rounded-full overflow-hidden group cursor-pointer p-[1px] flex-shrink-0"
+            whileHover={{ scale: 1.05 }}
+          >
+            <div className="absolute inset-0 gold-gradient group-hover:rotate-180 transition-transform duration-1000" />
+            <div className="w-full h-full bg-bg rounded-full flex items-center justify-center relative z-10">
+              <span className="font-display italic text-[10px] md:text-xs font-bold text-text-primary tracking-tighter gold-gradient">CL</span>
+            </div>
+          </motion.div>
+        </Magnetic>
 
         <div className="hidden md:block w-[1px] h-6 bg-white/10 mx-4" />
 
@@ -68,17 +71,19 @@ const Navbar: React.FC = () => {
           </a>
 
           {/* Action Button — WhatsApp */}
-          <a
-            href="https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20would%20like%20to%20book%20an%20event"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative group px-4 md:px-8 py-2 md:py-3 rounded-full overflow-hidden transition-all duration-500 shadow-lg shadow-accent/10 flex-shrink-0"
-          >
-            <span className="absolute inset-0 gold-gradient opacity-90 group-hover:opacity-100 transition-opacity" />
-            <span className="relative z-10 text-white text-[9px] md:text-[11px] font-bold tracking-widest uppercase">
-              Book <span className="hidden sm:inline">Now</span>
-            </span>
-          </a>
+          <Magnetic>
+            <a
+              href="https://wa.me/917483343412?text=Hi%20CINI%20LOKA%2C%20I%20would%20like%20to%20book%20an%20event"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group px-4 md:px-8 py-2 md:py-3 rounded-full overflow-hidden transition-all duration-500 shadow-lg shadow-accent/10 flex-shrink-0"
+            >
+              <span className="absolute inset-0 gold-gradient opacity-90 group-hover:opacity-100 transition-opacity" />
+              <span className="relative z-10 text-white text-[9px] md:text-[11px] font-bold tracking-widest uppercase">
+                Book <span className="hidden sm:inline">Now</span>
+              </span>
+            </a>
+          </Magnetic>
         </div>
       </motion.div>
     </nav>

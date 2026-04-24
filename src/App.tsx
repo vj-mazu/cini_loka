@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense } from "react";
 import LoadingScreen from "./components/LoadingScreen";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 
 // Lazy load components for performance
 const Navbar = React.lazy(() => import("./components/Navbar"));
@@ -12,9 +12,16 @@ const Stats = React.lazy(() => import("./components/Stats"));
 const Explorations = React.lazy(() => import("./components/Explorations"));
 const Footer = React.lazy(() => import("./components/Footer"));
 const FloatingPhone = React.lazy(() => import("./components/FloatingPhone"));
+const HorizontalShowcase = React.lazy(() => import("./components/HorizontalShowcase"));
+import SmoothScroll from "./components/SmoothScroll";
+import PrivacyModal from "./components/PrivacyModal";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     if (isLoading) {
@@ -26,11 +33,20 @@ function App() {
 
   return (
     <div className="bg-bg min-h-screen text-text-primary selection:bg-accent selection:text-white font-body">
+      {/* Scroll Progress Bar */}
+      {!isLoading && (
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 bg-accent z-[10000] origin-left shadow-[0_0_15px_rgba(226,194,133,0.5)]"
+          style={{ scaleX: scrollYProgress }}
+        />
+      )}
+
       <AnimatePresence mode="wait">
         {isLoading ? (
           <LoadingScreen key="loader" onComplete={() => setIsLoading(false)} />
         ) : (
-          <Suspense fallback={<div className="h-screen bg-bg" />}>
+          <SmoothScroll>
+            <Suspense fallback={<div className="h-screen bg-bg" />}>
             <motion.main
               key="content"
               initial={{ opacity: 0, y: 10 }}
@@ -48,28 +64,23 @@ function App() {
               </div>
               
               <Navbar />
-              <div id="home">
-                <Hero />
-              </div>
-              <div id="services">
-                <Services />
-              </div>
-              <div id="works">
-                <SelectedWorks />
-              </div>
-              <div id="reviews">
-                <Reviews />
-              </div>
-              <div id="gallery">
-                <Explorations />
-              </div>
-              <div id="stats">
-                <Stats />
-              </div>
-              <Footer />
+              <Hero />
+              <Services selectedServiceId={selectedServiceId} onServiceSelect={setSelectedServiceId} />
+              <HorizontalShowcase />
+              <SelectedWorks onServiceSelect={setSelectedServiceId} />
+              <Reviews />
+              <Explorations />
+              <Stats />
+              <Footer onPrivacyOpen={() => setIsPrivacyOpen(true)} />
               <FloatingPhone />
+              
+              <PrivacyModal 
+                isOpen={isPrivacyOpen} 
+                onClose={() => setIsPrivacyOpen(false)} 
+              />
             </motion.main>
           </Suspense>
+          </SmoothScroll>
         )}
       </AnimatePresence>
     </div>

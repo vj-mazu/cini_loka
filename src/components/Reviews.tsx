@@ -56,7 +56,7 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
 
 const Reviews: React.FC = () => {
   return (
-    <section className="bg-bg py-24 md:py-32 border-t border-white/5 relative overflow-hidden">
+    <section id="reviews" className="bg-bg py-24 md:py-32 border-t border-white/5 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 w-1/2 h-1/2 bg-accent/5 blur-[150px] rounded-full -translate-x-1/2 -translate-y-1/2" />
 
@@ -157,7 +157,7 @@ const Reviews: React.FC = () => {
           className="mt-20 flex justify-center"
         >
           <a
-            href="https://www.google.com/maps/place/CINI+LOKA/@16.2024,76.5856,17z"
+            href="https://maps.app.goo.gl/uN7Q9kHv3gDmn8jw9"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-6 px-12 py-6 rounded-full border border-white/10 glass-dark text-[11px] font-bold tracking-[0.3em] uppercase hover:bg-white hover:text-bg transition-all duration-700"

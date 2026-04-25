@@ -1,0 +1,6 @@
+# CINI LOKA — Robots.txt
+User-agent: *
+Allow: /
+Disallow: /assets/
+
+Sitemap: https://ciniloka.com/sitemap.xml

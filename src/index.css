@@ -148,12 +148,14 @@
   .text-gradient {
     background: linear-gradient(to bottom right, #ffffff 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.6) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .gold-gradient {
     background: linear-gradient(135deg, #E2C285 0%, #C7A252 50%, #8E6D24 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 }

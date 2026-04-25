@@ -154,7 +154,7 @@ const SelectedWorks: React.FC<{ onServiceSelect: (id: string | null) => void }> 
           
           <div className="relative z-10 max-w-3xl">
             <span className="text-[11px] text-accent font-bold uppercase tracking-[0.6em] mb-8 block opacity-80">Voices of Luxury</span>
-            <h3 className="text-5xl md:text-8xl font-display italic text-white mb-10 tracking-tighter leading-none">
+            <h3 className="text-5xl md:text-8xl font-display italic text-white mb-10 tracking-tighter leading-[1.1]">
               Explore All <span className="gold-gradient">Guest</span> Feedback
             </h3>
             <p className="text-text-secondary text-lg md:text-xl font-light leading-relaxed mb-16 opacity-70">

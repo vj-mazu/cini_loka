@@ -75,7 +75,7 @@ const Reviews: React.FC = () => {
                 Testimonials
               </span>
             </div>
-            <h2 className="text-6xl md:text-8xl lg:text-9xl font-display italic leading-[0.85] tracking-tighter">
+            <h2 className="text-6xl md:text-8xl lg:text-9xl font-display italic leading-[1.1] tracking-tighter pb-4">
               <span className="text-white/20">Guest</span> <span className="gold-gradient">Stories</span>
             </h2>
             <p className="text-text-secondary text-lg md:text-xl max-w-xl mt-10 leading-relaxed font-light">

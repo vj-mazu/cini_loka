@@ -45,7 +45,7 @@ const Journal: React.FC = () => {
               <div className="w-12 h-[1.5px] bg-stroke/50" />
               <span className="text-[10px] text-muted uppercase tracking-[0.4em] font-black">Stories</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-display text-text-primary leading-[0.9] tracking-tighter">
+            <h2 className="text-5xl md:text-7xl font-display text-text-primary leading-[1.1] tracking-tighter pb-2">
               Journal & <span className="italic text-white/30">Thoughts</span>
             </h2>
             <p className="text-muted text-base md:text-lg max-w-lg mt-10 leading-relaxed font-light">

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Hls from "hls.js";
+import { attachHls } from "../utils/hlsLoader";
 import gsap from "gsap";
 import { motion } from "framer-motion";
 
@@ -14,14 +14,7 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      const hlsUrl = "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(hlsUrl);
-        hls.attachMedia(video);
-      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = hlsUrl;
-      }
+      attachHls(video);
     }
 
     const marquee = marqueeRef.current;

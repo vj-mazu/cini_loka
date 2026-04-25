@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Hls from "hls.js";
+import { attachHls } from "../utils/hlsLoader";
 import gsap from "gsap";
 import { motion, AnimatePresence } from "framer-motion";
 import Magnetic from "./Magnetic";
@@ -18,16 +18,8 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
-
-    const hlsUrl = "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
-
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(hlsUrl);
-      hls.attachMedia(video);
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = hlsUrl;
+    if (video) {
+      attachHls(video);
     }
 
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -67,15 +59,6 @@ const Hero: React.FC = () => {
         {/* Multilayered Gradeints for depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-bg/60 via-bg/10 to-bg" />
         <div className="absolute inset-0 bg-gradient-to-r from-bg/40 via-transparent to-bg/20" />
-        
-        {/* Solar/Orbital Decorative Elements - Enhanced for visibility */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 -left-20 w-[40rem] h-[40rem] bg-accent/30 rounded-full blur-[140px] animate-pulse-slow" />
-          <div className="absolute bottom-1/4 -right-20 w-[45rem] h-[45rem] bg-accent/20 rounded-full blur-[160px] animate-float" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70rem] h-[70rem] border border-accent/10 rounded-full animate-spin-slow" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] border border-accent/15 rounded-full animate-spin-slow-reverse" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] border border-white/5 rounded-full animate-pulse-slow" />
-        </div>
       </div>
 
       {/* Content */}
@@ -84,7 +67,7 @@ const Hero: React.FC = () => {
           Elite Private Cinema & Events
         </div>
         
-        <h1 className="name-reveal gold-gradient text-6xl md:text-9xl lg:text-[13rem] font-display italic leading-[0.8] tracking-tighter mb-6 md:mb-16 select-none drop-shadow-[0_0_50px_rgba(226,194,133,0.25)]">
+        <h1 className="name-reveal gold-gradient text-6xl md:text-9xl lg:text-[13rem] font-display italic leading-[1.05] tracking-tighter mb-6 md:mb-16 select-none drop-shadow-[0_0_50px_rgba(226,194,133,0.25)]">
           CINI LOKA
         </h1>
 

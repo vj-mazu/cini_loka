@@ -23,6 +23,8 @@
   --animate-reveal: reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 20s linear infinite;
+  --animate-spin-slow-reverse: spin-slow 25s linear infinite reverse;
 
   @keyframes scroll-down {
     0% { transform: translateY(-20px); opacity: 0; }
@@ -40,6 +42,10 @@
   @keyframes pulse-slow {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.8; }
+  }
+  @keyframes spin-slow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
   }
 }
 
@@ -149,16 +155,6 @@
     background: linear-gradient(135deg, #E2C285 0%, #C7A252 50%, #8E6D24 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-
-  /* Performance Boost for complex sections */
-  section {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 1000px;
-  }
-  
-  #home {
-    content-visibility: visible;
   }
 }
 

@@ -22,15 +22,6 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
       } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
         video.src = hlsUrl;
       }
-      // Only play video when in view
-      ScrollTrigger.create({
-        trigger: video,
-        start: "top bottom",
-        onEnter: () => video.play(),
-        onLeave: () => video.pause(),
-        onEnterBack: () => video.play(),
-        onLeaveBack: () => video.pause(),
-      });
     }
 
     const marquee = marqueeRef.current;
@@ -50,10 +41,10 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
       <div className="absolute inset-0 z-0 scale-y-[-1] pointer-events-none opacity-40">
         <video
           ref={videoRef}
+          autoPlay
           muted
           loop
           playsInline
-          poster="/assets/cini-2.jpg"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-bg/80" />
@@ -80,7 +71,7 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h2 className="text-6xl md:text-9xl lg:text-[11rem] font-display text-text-primary leading-[0.8] tracking-tighter mb-20 select-none">
+            <h2 className="text-6xl md:text-9xl lg:text-[11rem] font-display text-text-primary leading-[1.1] tracking-tighter mb-20 select-none">
               Let's craft <span className="italic gold-gradient">magic</span> together
             </h2>
 

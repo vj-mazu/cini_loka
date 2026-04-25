@@ -87,7 +87,7 @@ const ProjectCard = ({ project, idx, onServiceSelect }: { project: any; idx: num
           <span className="text-[10px] text-accent-light uppercase tracking-[0.5em] font-bold block mb-4 opacity-70">
             {project.category}
           </span>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-display italic text-white tracking-tighter leading-none mb-2">
+          <h3 className="text-4xl md:text-5xl lg:text-6xl font-display italic text-white tracking-tighter leading-[1.1] mb-2 pb-2">
             {project.title}
           </h3>
         </div>
@@ -124,7 +124,7 @@ const SelectedWorks: React.FC<{ onServiceSelect: (id: string | null) => void }> 
                 Visual Journey
               </span>
             </div>
-            <h2 className="text-6xl md:text-8xl lg:text-9xl font-display italic leading-[0.85] tracking-tighter">
+            <h2 className="text-6xl md:text-8xl lg:text-9xl font-display italic leading-[1.1] tracking-tighter pb-8">
               <span className="text-white/20">Our</span> <span className="gold-gradient">Space</span>
             </h2>
             <p className="text-text-secondary text-lg md:text-xl max-w-xl mt-10 leading-relaxed font-light">

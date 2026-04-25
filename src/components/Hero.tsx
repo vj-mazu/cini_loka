@@ -62,13 +62,20 @@ const Hero: React.FC = () => {
           muted
           loop
           playsInline
-          preload="auto"
-          poster="/assets/cini-1.jpg"
           className="absolute top-1/2 left-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-85"
         />
         {/* Multilayered Gradeints for depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-bg/60 via-bg/10 to-bg" />
         <div className="absolute inset-0 bg-gradient-to-r from-bg/40 via-transparent to-bg/20" />
+        
+        {/* Solar/Orbital Decorative Elements - Enhanced for visibility */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 -left-20 w-[40rem] h-[40rem] bg-accent/30 rounded-full blur-[140px] animate-pulse-slow" />
+          <div className="absolute bottom-1/4 -right-20 w-[45rem] h-[45rem] bg-accent/20 rounded-full blur-[160px] animate-float" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70rem] h-[70rem] border border-accent/10 rounded-full animate-spin-slow" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] border border-accent/15 rounded-full animate-spin-slow-reverse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] border border-white/5 rounded-full animate-pulse-slow" />
+        </div>
       </div>
 
       {/* Content */}

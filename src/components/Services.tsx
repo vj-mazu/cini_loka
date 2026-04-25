@@ -56,9 +56,9 @@ const SERVICES = [
     price: "₹500",
     features: ["Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)", "Romantic Floral Decor"],
     gallery: [
+      "/assets/anni-custom-1.png",
       "/assets/anni-custom-2.jpg",
-      "/assets/anni-custom-3.png",
-      "/assets/anni-custom-1.png"
+      "/assets/anni-custom-3.png"
     ],
   },
   {

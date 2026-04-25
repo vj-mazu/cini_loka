@@ -31,136 +31,137 @@ const SHOWCASE_ITEMS = [
     description: "Your own private world for birthdays and anniversaries."
   },
 ];
-
 const HorizontalShowcase: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLDivElement>(null);
-  const [activeIdx, setActiveIdx] = useState(0);
-
   useEffect(() => {
-    const cards = gsap.utils.toArray(".showcase-card");
+    const items = gsap.utils.toArray(".showcase-item");
     
-    const scroll = ScrollTrigger.create({
-      trigger: triggerRef.current,
-      start: "top top",
-      end: `+=${cards.length * 100}%`,
-      pin: true,
-      scrub: 1,
-      snap: {
-        snapTo: 1 / (cards.length - 1),
-        duration: 0.5,
-        delay: 0.1,
-        ease: "power2.inOut"
-      },
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const index = Math.round(progress * (cards.length - 1));
-        setActiveIdx(index);
+    items.forEach((item: any) => {
+      const imgContainer = item.querySelector(".showcase-img-container");
+      const img = item.querySelector(".parallax-img");
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: item,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Unique 3D Reveal
+      tl.fromTo(imgContainer,
+        { 
+          clipPath: "inset(100% 0% 0% 0%)", 
+          scale: 0.8, 
+          rotateX: -20,
+          transformOrigin: "bottom center"
+        },
+        { 
+          clipPath: "inset(0% 0% 0% 0%)", 
+          scale: 1, 
+          rotateX: 0,
+          duration: 2, 
+          ease: "expo.out" 
+        }
+      )
+      .fromTo(item.querySelector(".showcase-subtitle"),
+        { opacity: 0, x: -30, filter: "blur(10px)" },
+        { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" },
+        "-=1.4"
+      )
+      .fromTo(item.querySelector(".showcase-title"),
+        { opacity: 0, x: -50, filter: "blur(15px)" },
+        { opacity: 1, x: 0, filter: "blur(0px)", duration: 1.2, ease: "power3.out" },
+        "-=1.2"
+      )
+      .fromTo(item.querySelector(".showcase-desc"),
+        { opacity: 0, y: 20, opacity: 0 },
+        { opacity: 1, y: 0, opacity: 0.8, duration: 0.8, ease: "power3.out" },
+        "-=1"
+      );
+
+      // Advanced Parallax with Depth
+      if (img) {
+        gsap.to(img, {
+          y: 100,
+          scale: 1.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: item,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          }
+        });
       }
     });
 
-    cards.forEach((card: any, i: number) => {
-      if (i === 0) return;
-      
-      gsap.fromTo(card, 
-        { yPercent: 100, opacity: 0 },
-        { 
-          yPercent: 0, 
-          opacity: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: triggerRef.current,
-            start: () => `top+=${i * window.innerHeight} top`,
-            end: () => `top+=${(i + 1) * window.innerHeight} top`,
-            scrub: true,
-          }
-        }
-      );
-
-      gsap.to(cards[i-1] as any, {
-        scale: 0.85,
-        opacity: 0.4,
-        filter: "blur(15px)",
-        ease: "none",
-        scrollTrigger: {
-          trigger: triggerRef.current,
-          start: () => `top+=${i * window.innerHeight} top`,
-          end: () => `top+=${(i + 1) * window.innerHeight} top`,
-          scrub: true,
-        }
-      });
-    });
-
-    return () => {
-      scroll.kill();
-    };
+    // Disable right click for "Security" as requested
+    const handleContextMenu = (e: MouseEvent) => e.preventDefault();
+    document.addEventListener('contextmenu', handleContextMenu);
+    return () => document.removeEventListener('contextmenu', handleContextMenu);
   }, []);
 
   return (
-    <section ref={triggerRef} className="bg-bg relative overflow-hidden">
-      <div ref={containerRef} className="h-screen w-full relative">
-        {SHOWCASE_ITEMS.map((item, index) => (
-          <div 
-            key={index} 
-            className="showcase-card absolute inset-0 h-screen w-full flex items-center justify-center p-4 md:p-20 bg-bg"
-            style={{ zIndex: index }}
-          >
-            <div className="absolute inset-0 z-0">
-              <img 
-                src={item.image} 
-                alt="" 
-                className="w-full h-full object-cover opacity-15 md:opacity-30"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-bg/95 via-bg/40 to-bg" />
-            </div>
-
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center max-w-[1500px] mx-auto w-full px-4 md:px-0">
-              <div className="space-y-4 md:space-y-12 order-2 md:order-1">
-                <div className="space-y-2 md:space-y-6">
+    <section id="works" className="bg-bg py-24 md:py-48 border-t border-white/5 selection:bg-accent selection:text-bg [perspective:2000px]">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="flex flex-col gap-32 md:gap-64">
+          {SHOWCASE_ITEMS.map((item, index) => (
+            <div 
+              key={index} 
+              className="showcase-item group relative grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center will-change-transform"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* Text Side */}
+              <div className={`space-y-8 md:space-y-12 ${index % 2 !== 0 ? "md:order-2" : ""}`}>
+                <div className="space-y-4">
                   <div className="flex items-center gap-4">
-                     <span className="text-accent text-[9px] md:text-sm font-bold uppercase tracking-[0.4em] md:tracking-[0.6em]">
-                      {item.subtitle}
+                    <span className="text-accent text-[11px] font-bold uppercase tracking-[0.4em]">
+                      0{index + 1} / 04
                     </span>
-                    <div className="h-[1px] w-8 md:w-12 bg-accent/30" />
+                    <div className="w-12 h-[1px] bg-accent/30" />
                   </div>
-                  <h2 className="text-4xl md:text-[7rem] lg:text-[10rem] font-display italic gold-gradient leading-[0.85] tracking-tighter">
+                  <span className="showcase-subtitle text-white/40 text-xs md:text-sm font-bold uppercase tracking-[0.6em] block">
+                    {item.subtitle}
+                  </span>
+                  <h2 className="showcase-title text-5xl md:text-8xl lg:text-[10rem] font-display italic gold-gradient leading-[1.1] tracking-tighter pb-4">
                     {item.title}
                   </h2>
                 </div>
-                <p className="text-text-secondary text-sm md:text-2xl font-light leading-relaxed max-w-xl opacity-90">
+                
+                <p className="showcase-desc text-base md:text-xl lg:text-2xl font-light leading-relaxed max-w-xl opacity-80">
                   {item.description}
                 </p>
-                
-                <div className="flex items-center gap-4 md:gap-10">
-                  <div className="w-10 md:w-20 h-[1.5px] gold-gradient" />
-                  <span className="text-xs md:text-lg text-white font-display italic tracking-[0.2em]">
-                    0{index + 1} <span className="text-white/20 px-1 md:px-2">/</span> 04
-                  </span>
+
+                <div className="pt-2 md:pt-6">
+                   <div className="w-20 h-[1px] gold-gradient opacity-30" />
                 </div>
               </div>
 
-              <div className="relative aspect-[4/3] md:aspect-[4/5] rounded-[2rem] md:rounded-[5rem] overflow-hidden border border-white/10 shadow-2xl group shadow-accent/5 order-1 md:order-2">
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-transparent to-transparent opacity-60 md:opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+              {/* Image Side */}
+              <div className={`showcase-img-container relative aspect-square md:aspect-[3/4] rounded-[2.5rem] md:rounded-[5rem] overflow-hidden border border-white/5 shadow-2xl glass will-change-[clip-path,transform] ${index % 2 !== 0 ? "md:order-1" : ""}`}>
+                <div className="parallax-img absolute inset-0 z-0 will-change-transform">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    loading="lazy"
+                    onLoad={(e) => {
+                      (e.target as HTMLImageElement).classList.add('opacity-100');
+                    }}
+                    className="w-full h-full object-cover scale-110 opacity-0 transition-opacity duration-1000 group-hover:scale-105" 
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-bg/60 to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
+                
+                {/* Floating Decorative Elements */}
+                <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-10 hidden sm:block">
+                   <div className="glass-dark px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/10 backdrop-blur-md">
+                      <span className="text-[9px] md:text-[10px] text-white/60 tracking-widest uppercase font-bold">Secure Content</span>
+                   </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="absolute bottom-8 md:bottom-20 left-1/2 -translate-x-1/2 z-[100] flex gap-3 md:gap-6 pointer-events-none">
-        {[0,1,2,3].map((i) => (
-          <div 
-            key={i} 
-            className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-500 ${
-              activeIdx === i ? "bg-accent w-6 md:w-10" : "bg-white/20"
-            }`} 
-          />
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

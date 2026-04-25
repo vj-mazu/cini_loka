@@ -30,13 +30,6 @@ function App() {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
-      // Refresh ScrollTrigger after a short delay to account for lazy-loaded content
-      const timer = setTimeout(() => {
-        import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
-          ScrollTrigger.refresh();
-        });
-      }, 1000);
-      return () => clearTimeout(timer);
     }
   }, [isLoading]);
 

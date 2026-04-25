@@ -150,7 +150,7 @@ const Services: React.FC<ServicesProps> = ({ selectedServiceId, onServiceSelect 
                 ease: [0.22, 1, 0.36, 1],
               }}
               onClick={() => onServiceSelect(service.id)}
-              className="group relative glass rounded-[3rem] p-12 md:p-14 transition-all duration-700 cursor-pointer hover:bg-white/[0.08] hover:border-white/20"
+              className="group relative glass rounded-[3rem] p-10 md:p-14 transition-all duration-700 cursor-pointer hover:bg-white/[0.08] hover:border-white/20"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[3rem]" />
               

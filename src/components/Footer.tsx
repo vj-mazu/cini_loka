@@ -113,15 +113,15 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
               href="https://mail.google.com/mail/?view=cm&fs=1&to=hello@ciniloka.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center gap-10 px-12 md:px-20 py-10 md:py-16 rounded-[4rem] glass hover:bg-white/[0.08] transition-all duration-700 shadow-2xl cursor-pointer z-10"
+              className="group relative inline-flex items-center justify-center gap-4 md:gap-10 px-6 md:px-20 py-6 md:py-16 rounded-[2.5rem] md:rounded-[4rem] glass hover:bg-white/[0.08] transition-all duration-700 shadow-2xl cursor-pointer z-10 w-full max-w-xl md:w-auto"
             >
-              <div className="flex flex-col text-left">
-                <span className="text-[10px] text-accent tracking-[0.6em] font-black uppercase mb-4 opacity-80">Direct Line</span>
-                <span className="text-3xl md:text-5xl font-display italic text-text-primary group-hover:gold-gradient transition-all duration-700">hello@ciniloka.com</span>
+              <div className="flex flex-col text-center sm:text-left">
+                <span className="text-[10px] text-accent tracking-[0.6em] font-black uppercase mb-2 md:mb-4 opacity-80">Direct Line</span>
+                <span className="text-xl md:text-5xl font-display italic text-text-primary group-hover:gold-gradient transition-all duration-700 break-all md:break-normal">hello@ciniloka.com</span>
               </div>
-              <div className="w-20 h-20 md:w-28 md:h-28 rounded-full gold-gradient p-[2px] flex items-center justify-center transition-transform duration-1000 group-hover:rotate-45 shadow-lg shadow-accent/20">
+              <div className="w-14 h-14 md:w-28 md:h-28 rounded-full gold-gradient p-[2px] flex-shrink-0 flex items-center justify-center transition-transform duration-1000 group-hover:rotate-45 shadow-lg shadow-accent/20">
                 <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
-                   <svg className="w-8 h-8 md:w-12 md:h-12 text-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                   <svg className="w-6 h-6 md:w-12 md:h-12 text-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                      <line x1="7" y1="17" x2="17" y2="7"></line>
                      <polyline points="7 7 17 7 17 17"></polyline>
                    </svg>
@@ -171,7 +171,7 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
                </button>
             </div>
             
-            <div className="flex items-center gap-12">
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12">
               <a 
                 href="https://wa.me/917483343412" 
                 target="_blank" 
@@ -211,9 +211,9 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
             </div>
 
             <div className="flex flex-col items-center md:items-end gap-2">
-              <span className="text-[8px] text-muted/30 tracking-[0.6em] uppercase">RAICHUR, KA 584103</span>
-              <div className="text-[9px] text-muted/40 font-bold tracking-[0.2em] uppercase text-center md:text-right">
-                Designed & Developed by <span className="text-accent/50">Manjunath Patil</span><br />
+              <span className="text-[10px] text-muted/40 tracking-[0.5em] uppercase">RAICHUR, KA 584103</span>
+              <div className="text-[10px] text-muted/50 font-bold tracking-[0.15em] uppercase text-center md:text-right">
+                Designed & Developed by <span className="text-accent/60">Manjunath Patil</span><br />
                 <a href="tel:+919448986953" className="hover:text-white transition-colors">+91 94489 86953</a>
               </div>
             </div>

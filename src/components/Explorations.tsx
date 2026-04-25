@@ -16,6 +16,7 @@ const ITEMS = [
 const Explorations: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const quoteRef = useRef<HTMLDivElement>(null);
+  const quoteContentRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -31,29 +32,29 @@ const Explorations: React.FC = () => {
     });
 
     // Fade in/out logic for the quote
-    gsap.fromTo(quoteRef.current,
+    gsap.fromTo(quoteContentRef.current,
       { opacity: 0, scale: 0.9, y: 50, filter: "blur(20px)" },
       {
         opacity: 1, scale: 1, y: 0, filter: "blur(0px)",
         ease: "power3.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 65%",
-          end: "top 10%",
+          start: "top 50%",
+          end: "top 0%",
           scrub: 1.5,
         }
       }
     );
 
     // Fade out quote at the end
-    gsap.to(quoteRef.current, {
+    gsap.to(quoteContentRef.current, {
       opacity: 0,
       y: -100,
       scale: 0.9,
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "bottom 80%",
-        end: "bottom 20%",
+        start: "bottom 90%",
+        end: "bottom 30%",
         scrub: 1,
       }
     });
@@ -106,23 +107,28 @@ const Explorations: React.FC = () => {
   }, []);
 
   return (
-    <section id="gallery" ref={containerRef} className="relative min-h-[150vh] bg-bg overflow-hidden flex flex-col items-center py-32 md:py-48">
+    <section id="gallery" ref={containerRef} className="relative min-h-[110vh] md:min-h-[150vh] bg-bg overflow-hidden flex flex-col items-center pt-24 pb-0 md:py-48">
       
       {/* Central Floating Quote - Pinned via GSAP, not CSS fixed */}
       <div 
         ref={quoteRef} 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-center max-w-7xl px-10 pointer-events-none opacity-0"
+        className="absolute top-1/2 inset-x-6 md:inset-x-10 -translate-y-1/2 z-10 pointer-events-none flex flex-col items-center"
       >
-        <div className="flex items-center justify-center gap-6 mb-8">
-          <div className="w-12 h-[1px] gold-gradient" />
-          <span className="text-[11px] text-accent tracking-[0.6em] font-bold uppercase opacity-80">
-            Visionary Experience
-          </span>
-          <div className="w-12 h-[1px] gold-gradient" />
+        <div 
+          ref={quoteContentRef}
+          className="w-full flex flex-col items-center text-center opacity-0 scale-90"
+        >
+          <div className="flex items-center justify-center gap-2 md:gap-6 mb-8">
+            <div className="w-6 md:w-12 h-[1px] gold-gradient" />
+            <span className="text-[10px] md:text-[11px] text-accent tracking-[0.2em] md:tracking-[0.6em] font-bold uppercase opacity-80 whitespace-nowrap">
+              Visionary Experience
+            </span>
+            <div className="w-6 md:w-12 h-[1px] gold-gradient" />
+          </div>
+          <h2 className="text-2xl md:text-8xl lg:text-[10rem] font-display italic text-text-primary leading-[1.05] tracking-tighter">
+            "Where every <span className="gold-gradient">moment</span> becomes a <span className="text-white/40">cinematic</span> masterpiece."
+          </h2>
         </div>
-        <h2 className="text-4xl md:text-8xl lg:text-[10rem] font-display italic text-text-primary leading-[1.05] tracking-tighter">
-          "Where every <span className="gold-gradient">moment</span> becomes a <span className="text-white/40">cinematic</span> masterpiece."
-        </h2>
       </div>
 
       {/* Parallax Images Column Layout */}

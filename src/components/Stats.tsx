@@ -10,7 +10,7 @@ const STATS = [
 
 const Stats: React.FC = () => {
   return (
-    <section id="stats" className="bg-bg py-24 md:py-32 border-t border-white/5 relative overflow-hidden">
+    <section id="stats" className="bg-bg py-12 md:py-32 border-t border-white/5 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent opacity-30" />
       
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">

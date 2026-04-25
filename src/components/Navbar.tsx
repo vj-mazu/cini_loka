@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-        className={`inline-flex items-center rounded-full glass transition-all duration-700 max-w-[95vw] md:max-w-none p-1.5 md:p-2 px-2 md:px-5 ${
+        className={`inline-flex items-center rounded-full glass transition-all duration-700 max-w-[98vw] md:max-w-none p-2 md:p-2 px-3 md:px-5 ${
           isScrolled ? "bg-bg/60 border-white/20 shadow-2xl shadow-accent/5" : "bg-white/5 border-white/5"
         }`}
       >
@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
         <div className="hidden md:block w-[1px] h-6 bg-white/10 mx-4" />
 
         {/* Links */}
-        <div className="flex items-center gap-0 md:gap-1">
+        <div className="flex items-center gap-1">
           {[
             { name: "Home", href: "#home", desktopOnly: false },
             { name: "Services", href: "#services", desktopOnly: false },
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
 
         <div className="w-[1px] h-6 bg-white/10 mx-1 md:mx-4" />
 
-        <div className="flex items-center gap-1 md:gap-2 pr-0.5 md:pr-2">
+        <div className="flex items-center gap-2 md:gap-2 pr-1 md:pr-2">
           {/* Call Action */}
           <a
             href="tel:+917483343412"

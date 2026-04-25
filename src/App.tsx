@@ -13,6 +13,8 @@ const Explorations = React.lazy(() => import("./components/Explorations"));
 const Footer = React.lazy(() => import("./components/Footer"));
 const FloatingPhone = React.lazy(() => import("./components/FloatingPhone"));
 const HorizontalShowcase = React.lazy(() => import("./components/HorizontalShowcase"));
+const TextRibbon = React.lazy(() => import("./components/TextRibbon"));
+const TextRibbonHero = React.lazy(() => import("./components/TextRibbonHero"));
 import SmoothScroll from "./components/SmoothScroll";
 import PrivacyModal from "./components/PrivacyModal";
 
@@ -65,11 +67,13 @@ function App() {
               
               <Navbar />
               <Hero />
+              <TextRibbonHero />
               <Services selectedServiceId={selectedServiceId} onServiceSelect={setSelectedServiceId} />
               <HorizontalShowcase />
               <SelectedWorks onServiceSelect={setSelectedServiceId} />
               <Reviews />
               <Explorations />
+              <TextRibbon />
               <Stats />
               <Footer onPrivacyOpen={() => setIsPrivacyOpen(true)} />
               <FloatingPhone />

@@ -49,7 +49,7 @@ const HorizontalShowcase: React.FC = () => {
         scrollTrigger: {
           trigger: triggerRef.current,
           start: "top top",
-          end: "2000 top",
+          end: window.innerWidth < 768 ? "1200 top" : "2000 top",
           scrub: 0.6,
           pin: true,
           anticipatePin: 1,

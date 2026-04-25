@@ -155,8 +155,8 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                 <div className="w-full md:w-[42%] flex flex-col items-start text-left min-h-0">
                   <div className="flex items-center gap-3 mb-3 md:mb-4 flex-shrink-0">
                     <span className="text-xl md:text-2xl">{service.icon}</span>
-                    <div className="px-2.5 py-1 rounded-full bg-accent/5 border border-accent/10">
-                      <span className="text-accent text-[8px] font-bold uppercase tracking-[0.4em]">
+                    <div className="px-3 py-1 rounded-full bg-accent/5 border border-accent/10">
+                      <span className="text-accent text-[9px] font-bold uppercase tracking-[0.4em]">
                         Signature
                       </span>
                     </div>
@@ -205,7 +205,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                     <div className="grid grid-cols-2 gap-2.5 mb-5">
                       {service.packages.map((pkg, i) => (
                         <div key={i} className="p-3.5 rounded-[1.2rem] glass border border-white/5 text-center group hover:bg-white/[0.05] transition-all">
-                          <span className="text-[6px] text-accent uppercase tracking-[0.3em] font-black block mb-1 opacity-60">{pkg.name}</span>
+                          <span className="text-[8px] text-accent uppercase tracking-[0.3em] font-black block mb-1 opacity-60">{pkg.name}</span>
                           <span className="text-base md:text-lg font-display italic text-white leading-none group-hover:gold-gradient transition-all">{pkg.rate}</span>
                         </div>
                       ))}

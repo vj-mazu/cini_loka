@@ -150,6 +150,16 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  /* Performance Boost for complex sections */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
+  }
+  
+  #home {
+    content-visibility: visible;
+  }
 }
 
 .blur-in {

@@ -22,6 +22,15 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
       } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
         video.src = hlsUrl;
       }
+      // Only play video when in view
+      ScrollTrigger.create({
+        trigger: video,
+        start: "top bottom",
+        onEnter: () => video.play(),
+        onLeave: () => video.pause(),
+        onEnterBack: () => video.play(),
+        onLeaveBack: () => video.pause(),
+      });
     }
 
     const marquee = marqueeRef.current;
@@ -41,10 +50,10 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
       <div className="absolute inset-0 z-0 scale-y-[-1] pointer-events-none opacity-40">
         <video
           ref={videoRef}
-          autoPlay
           muted
           loop
           playsInline
+          poster="/assets/cini-2.jpg"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-bg/80" />

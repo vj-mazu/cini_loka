@@ -62,6 +62,8 @@ const Hero: React.FC = () => {
           muted
           loop
           playsInline
+          preload="auto"
+          poster="/assets/cini-1.jpg"
           className="absolute top-1/2 left-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-85"
         />
         {/* Multilayered Gradeints for depth */}

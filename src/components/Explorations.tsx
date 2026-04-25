@@ -15,49 +15,10 @@ const ITEMS = [
 
 const Explorations: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const quoteRef = useRef<HTMLDivElement>(null);
-  const quoteContentRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     if (!containerRef.current) return;
-
-    // Pinning the center quote
-    ScrollTrigger.create({
-      trigger: containerRef.current,
-      start: "top top",
-      end: "bottom bottom",
-      pin: quoteRef.current,
-      pinSpacing: false,
-    });
-
-    // Fade in/out logic for the quote
-    gsap.fromTo(quoteContentRef.current,
-      { opacity: 0, scale: 0.9, y: 50, filter: "blur(20px)" },
-      {
-        opacity: 1, scale: 1, y: 0, filter: "blur(0px)",
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 50%",
-          end: "top 0%",
-          scrub: 1.5,
-        }
-      }
-    );
-
-    // Fade out quote at the end
-    gsap.to(quoteContentRef.current, {
-      opacity: 0,
-      y: -100,
-      scale: 0.9,
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "bottom 90%",
-        end: "bottom 30%",
-        scrub: 1,
-      }
-    });
 
     // Unique Animation for each image
     itemRefs.current.forEach((item, idx) => {
@@ -90,7 +51,7 @@ const Explorations: React.FC = () => {
 
       // Parallax movement for the image container
       gsap.to(item, {
-        y: -200,
+        y: window.innerWidth < 768 ? -80 : -200,
         ease: "none",
         scrollTrigger: {
           trigger: item,
@@ -109,34 +70,26 @@ const Explorations: React.FC = () => {
   return (
     <section id="gallery" ref={containerRef} className="relative min-h-[110vh] md:min-h-[150vh] bg-bg overflow-hidden flex flex-col items-center pt-24 pb-0 md:py-48">
       
-      {/* Central Floating Quote - Pinned via GSAP, not CSS fixed */}
-      <div 
-        ref={quoteRef} 
-        className="absolute top-1/2 inset-x-6 md:inset-x-10 -translate-y-1/2 z-10 pointer-events-none flex flex-col items-center"
-      >
-        <div 
-          ref={quoteContentRef}
-          className="w-full flex flex-col items-center text-center opacity-0 scale-90"
-        >
-          <div className="flex items-center justify-center gap-2 md:gap-6 mb-8">
-            <div className="w-6 md:w-12 h-[1px] gold-gradient" />
-            <span className="text-[10px] md:text-[11px] text-accent tracking-[0.2em] md:tracking-[0.6em] font-bold uppercase opacity-80 whitespace-nowrap">
-              Visionary Experience
-            </span>
-            <div className="w-6 md:w-12 h-[1px] gold-gradient" />
-          </div>
-          <h2 className="text-2xl md:text-8xl lg:text-[10rem] font-display italic text-text-primary leading-[1.05] tracking-tighter">
-            "Where every <span className="gold-gradient">moment</span> becomes a <span className="text-white/40">cinematic</span> masterpiece."
-          </h2>
+      {/* Header */}
+      <div className="max-w-[1400px] mx-auto px-6 text-center mb-20 md:mb-32">
+        <div className="flex items-center justify-center gap-5 mb-8">
+          <div className="w-16 h-[1.5px] bg-accent/30" />
+          <span className="text-[11px] text-accent tracking-[0.6em] font-bold uppercase opacity-80">
+            Gallery
+          </span>
+          <div className="w-16 h-[1.5px] bg-accent/30" />
         </div>
+        <h2 className="text-6xl md:text-8xl lg:text-9xl font-display italic leading-[0.85] tracking-tighter">
+          Visual <span className="gold-gradient">Journey</span>
+        </h2>
       </div>
 
       {/* Parallax Images Column Layout */}
       <div className="relative z-0 w-full max-w-[1500px] mx-auto px-6 mt-[-100px] mb-[10vh]">
-        <div className="grid grid-cols-2 gap-10 md:gap-48">
+        <div className="grid grid-cols-2 gap-10 md:gap-48 pt-20 md:pt-0">
           
           {/* Left Column */}
-          <div className="flex flex-col gap-10 md:gap-[20vh] pt-0">
+          <div className="flex flex-col gap-10 md:gap-[20vh] pt-10 md:pt-0">
             {ITEMS.filter(item => item.side === "left").map((item) => {
               const globalIdx = ITEMS.indexOf(item);
               return (

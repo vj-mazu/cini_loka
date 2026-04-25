@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const CustomCursor: React.FC = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
-  
+  const [isHovering, setIsHovering] = useState(false);
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  
-  const springConfig = { damping: 25, stiffness: 150 };
+
+  const springConfig = { damping: 25, stiffness: 700 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -18,44 +16,48 @@ const CustomCursor: React.FC = () => {
       cursorY.set(e.clientY);
     };
 
-    const handleMouseEnter = () => setIsHidden(false);
-    const handleMouseLeave = () => setIsHidden(true);
-    
-    const handleTagHover = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const isActionable = target.closest('a, button, [role="button"], .cursor-pointer');
-      setIsHovered(!!isActionable);
-    };
+    const handleHoverStart = () => setIsHovering(true);
+    const handleHoverEnd = () => setIsHovering(false);
 
     window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleTagHover);
-    document.addEventListener("mouseenter", handleMouseEnter);
-    document.addEventListener("mouseleave", handleMouseLeave);
+
+    const interactiveElements = document.querySelectorAll('a, button, [role="button"], .group');
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", handleHoverStart);
+      el.addEventListener("mouseleave", handleHoverEnd);
+    });
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseover", handleTagHover);
-      document.removeEventListener("mouseenter", handleMouseEnter);
-      document.removeEventListener("mouseleave", handleMouseLeave);
+      interactiveElements.forEach((el) => {
+        el.removeEventListener("mouseenter", handleHoverStart);
+        el.removeEventListener("mouseleave", handleHoverEnd);
+      });
     };
-  }, [cursorX, cursorY]);
+  }, []);
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 w-8 h-8 bg-accent rounded-full pointer-events-none z-[9999] mix-blend-difference"
-      style={{
-        x: cursorXSpring,
-        y: cursorYSpring,
-        translateX: "-50%",
-        translateY: "-50%",
-        opacity: isHidden ? 0 : 1,
-      }}
-      animate={{
-        scale: isHovered ? 2.5 : 1,
-        backgroundColor: isHovered ? "var(--color-accent-light)" : "var(--color-accent)",
-      }}
-      transition={{ type: "spring", damping: 20, stiffness: 100 }}
-    />
+    <>
+      <motion.div
+        className="fixed top-0 left-0 w-8 h-8 bg-accent/20 rounded-full pointer-events-none z-[10000] mix-blend-difference hidden md:block"
+        style={{
+          translateX: cursorXSpring,
+          translateY: cursorYSpring,
+          scale: isHovering ? 2.5 : 1,
+          x: "-50%",
+          y: "-50%",
+        }}
+      />
+      <motion.div
+        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[10001] hidden md:block"
+        style={{
+          translateX: cursorX,
+          translateY: cursorY,
+          x: "-50%",
+          y: "-50%",
+        }}
+      />
+    </>
   );
 };
 

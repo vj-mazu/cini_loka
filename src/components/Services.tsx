@@ -91,7 +91,7 @@ const SERVICES = [
     title: "Kids-Friendly Experiences",
     description: "A safe, fun, and beautifully decorated space for children's parties.",
     price: "₹500",
-    gallery: ["/assets/user_images/image6.jpg", "/assets/cini-2.jpg", "/assets/bday-custom-2.jpg", "/assets/cini-1.jpg"],
+    gallery: ["/assets/user_images/image6.jpg", "/assets/cini-2.jpg", "/assets/bday-custom-2.jpg"],
     features: ["Child-Safe Environment", "Colorful Themed Decor", "Cartoon Screenings"],
   },
 ];

@@ -114,7 +114,7 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
             </div>
 
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=hello@ciniloka.com"
+              href="mailto:hello@ciniloka.com"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative inline-flex items-center justify-center gap-4 md:gap-10 px-6 md:px-20 py-6 md:py-16 rounded-[2.5rem] md:rounded-[4rem] glass hover:bg-white/[0.08] transition-all duration-700 shadow-2xl cursor-pointer z-10 w-full max-w-xl md:w-auto"

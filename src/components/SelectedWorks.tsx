@@ -10,7 +10,7 @@ const PROJECTS = [
     serviceId: "anniversary"
   },
   {
-    title: "Matured Function",
+    title: "Traditional Functions",
     category: "Themed Design",
     image: "/assets/user_images/image1.jpg",
     span: "md:col-span-5",

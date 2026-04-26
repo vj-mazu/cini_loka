@@ -12,16 +12,10 @@ const SHOWCASE_ITEMS = [
     description: "Experience films in unparalleled comfort with our signature luxury sofa arrangements."
   },
   {
-    title: "Matured Functions",
+    title: "Traditional Functions",
     subtitle: "Elegant Event Design",
-    image: "/assets/user_images/image1.jpg",
-    description: "Sophisticated setups for life's most meaningful milestones and mature celebrations."
-  },
-  {
-    title: "Themed Magic",
-    subtitle: "Bespoke Decorations",
-    image: "/assets/user_images/image2.jpg",
-    description: "Transforming spaces into dreamscapes with custom-crafted theme designs."
+    images: ["/assets/user_images/image1.jpg", "/assets/user_images/image2.jpg"],
+    description: "Sophisticated and culturally rich setups for traditional ceremonies and milestones."
   },
   {
     title: "Private Moments",
@@ -38,7 +32,7 @@ const HorizontalShowcase: React.FC = () => {
 
       items.forEach((item, i) => {
         const imgContainer = item.querySelector(".showcase-img-container");
-        const img = item.querySelector(".parallax-img");
+        const images = item.querySelectorAll(".parallax-img");
         const isEven = i % 2 === 0;
 
         // ─── Staggered Cinematic Entrance Timeline ───
@@ -109,8 +103,8 @@ const HorizontalShowcase: React.FC = () => {
           delay: i * 0.3,
         });
 
-        // ─── Internal parallax on the image ───
-        if (img) {
+        // ─── Internal parallax on the images ───
+        images.forEach((img) => {
           gsap.fromTo(
             img,
             { yPercent: -10 },
@@ -125,7 +119,7 @@ const HorizontalShowcase: React.FC = () => {
               },
             }
           );
-        }
+        });
       });
     });
 
@@ -160,7 +154,7 @@ const HorizontalShowcase: React.FC = () => {
                 <div className="space-y-3">
                   <div className="flex items-center gap-4">
                     <span className="text-accent text-[11px] font-bold uppercase tracking-[0.4em]">
-                      0{index + 1} / 04
+                      0{index + 1} / 03
                     </span>
                     <div className="w-12 h-[1px] bg-accent/30" />
                   </div>
@@ -187,17 +181,33 @@ const HorizontalShowcase: React.FC = () => {
                   index % 2 !== 0 ? "md:order-1" : ""
                 }`}
               >
-                <div className="parallax-img absolute inset-0 z-0">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                    onLoad={(e) =>
-                      (e.target as HTMLImageElement).classList.add("loaded")
-                    }
-                    className="w-full h-full object-cover scale-110 opacity-0 transition-opacity duration-700 [&.loaded]:opacity-100"
-                  />
-                </div>
+                {"images" in item ? (
+                  <div className="absolute inset-0 z-0 flex gap-2 h-full p-0">
+                    {item.images.map((img, i) => (
+                      <div key={i} className="parallax-img relative overflow-hidden flex-1">
+                        <img
+                          src={img}
+                          alt={`${item.title} ${i}`}
+                          loading="lazy"
+                          onLoad={(e) => (e.target as HTMLImageElement).classList.add("loaded")}
+                          className="w-full h-full object-cover scale-110 opacity-0 transition-opacity duration-700 [&.loaded]:opacity-100"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="parallax-img absolute inset-0 z-0">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      onLoad={(e) =>
+                        (e.target as HTMLImageElement).classList.add("loaded")
+                      }
+                      className="w-full h-full object-cover scale-110 opacity-0 transition-opacity duration-700 [&.loaded]:opacity-100"
+                    />
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-bg/50 via-transparent to-transparent opacity-50 group-hover:opacity-30 transition-opacity duration-700" />
 
                 {/* Corner accents */}

@@ -101,24 +101,26 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
                 className="group flex flex-col items-center gap-4 glass p-8 rounded-[2.5rem] hover:bg-white/5 transition-all duration-500 lg:col-span-1"
               >
                 <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-white text-xl">📍</div>
-                <span className="text-[11px] text-white/60 font-bold uppercase tracking-[0.3em]">Visit Us</span>
+                <span className="text-[11px] text-white/60 font-bold uppercase tracking-[0.3em]">Location</span>
                 <span className="text-lg font-medium">Ashok Nagar, Raichur</span>
               </a>
             </div>
 
             <a
-              href="mailto:hello@ciniloka.com"
+              href="mailto:ciniloka.raichur@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center justify-center gap-4 md:gap-10 px-6 md:px-20 py-6 md:py-16 rounded-[2.5rem] md:rounded-[4rem] glass hover:bg-white/[0.08] transition-all duration-700 shadow-2xl cursor-pointer z-10 w-full max-w-xl md:w-auto"
+              className="group relative flex flex-col sm:flex-row items-center justify-between gap-8 px-8 md:px-16 py-10 md:py-12 rounded-[2.5rem] md:rounded-[3rem] glass hover:bg-white/[0.08] transition-all duration-700 shadow-2xl cursor-pointer z-10 w-full max-w-2xl mx-auto"
             >
-              <div className="flex flex-col text-center sm:text-left">
-                <span className="text-[10px] text-accent tracking-[0.6em] font-black uppercase mb-2 md:mb-4 opacity-80">Direct Line</span>
-                <span className="text-xl md:text-5xl font-display italic text-text-primary group-hover:gold-gradient transition-all duration-700 break-all md:break-normal">hello@ciniloka.com</span>
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-0">
+                <span className="text-[10px] text-accent tracking-[0.6em] font-black uppercase mb-3 opacity-80">Email</span>
+                <span className="text-xl md:text-4xl font-display italic text-text-primary group-hover:gold-gradient transition-all duration-700 break-all sm:break-normal">
+                  ciniloka.raichur@gmail.com
+                </span>
               </div>
-              <div className="w-14 h-14 md:w-28 md:h-28 rounded-full gold-gradient p-[2px] flex-shrink-0 flex items-center justify-center transition-transform duration-1000 group-hover:rotate-45 shadow-lg shadow-accent/20">
+              <div className="w-12 h-12 md:w-20 md:h-20 rounded-full gold-gradient p-[1px] flex-shrink-0 flex items-center justify-center transition-transform duration-1000 group-hover:rotate-45 shadow-lg shadow-accent/20">
                 <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
-                   <svg className="w-6 h-6 md:w-12 md:h-12 text-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                   <svg className="w-5 h-5 md:w-8 md:h-8 text-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                      <line x1="7" y1="17" x2="17" y2="7"></line>
                      <polyline points="7 7 17 7 17 17"></polyline>
                    </svg>
@@ -133,10 +135,15 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left text-text-secondary/70">
             <div className="md:col-span-2">
               <span className="text-[10px] text-white tracking-[0.5em] uppercase font-bold block mb-6">Raichur Elite Cinema</span>
-              <p className="text-base leading-relaxed font-light">
+              <a 
+                href="https://maps.app.goo.gl/uN7Q9kHv3gDmn8jw9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base leading-relaxed font-light hover:text-accent transition-colors duration-300 block"
+              >
                 Mallikarjun Towers, beside AME'S Dental College,<br />
                 Ashok Nagar, Raichur, Karnataka 584103
-              </p>
+              </a>
             </div>
             <div>
               <span className="text-[10px] text-white tracking-[0.5em] uppercase font-bold block mb-6">Experience Time</span>

@@ -66,7 +66,7 @@ const SERVICES = [
     id: "themed",
     icon: "🎨",
     title: "Themed Party Design",
-    description: "Bespoke themed experiences tailored to your vision. Specialized in Matured Functions and elegant setups.",
+    description: "Bespoke themed experiences tailored to your vision. Specialized in Traditional Functions and elegant setups.",
     price: "₹500",
     gallery: [
       "/assets/user_images/image1.jpg",
@@ -75,7 +75,7 @@ const SERVICES = [
       "/assets/cini-4.jpg",
       "/assets/cini-2.jpg"
     ],
-    features: ["Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)", "Matured Function Themes"],
+    features: ["Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)", "Traditional Function Themes"],
   },
   {
     id: "kids",

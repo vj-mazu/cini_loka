@@ -94,7 +94,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                             src={item}
                             alt={`${service.title} gallery ${idx}`}
                             className="w-full h-full object-cover select-none"
-                            loading="lazy"
+                            loading={idx === 0 ? "eager" : "lazy"}
                             draggable="false"
                           />
                         )}

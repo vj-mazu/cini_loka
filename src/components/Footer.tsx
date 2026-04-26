@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  const copyEmail = (e: React.MouseEvent) => {
+  const copyEmail = () => {
     // We let the default mailto: trigger, but also copy to clipboard
     navigator.clipboard.writeText("ciniloka.raichur@gmail.com");
     setIsCopied(true);

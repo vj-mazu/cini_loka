@@ -31,7 +31,11 @@ const Navbar: React.FC = () => {
           >
             <div className="absolute inset-0 gold-gradient group-hover:rotate-180 transition-transform duration-1000" />
             <div className="w-full h-full bg-bg rounded-full flex items-center justify-center relative z-10">
-              <span className="font-display italic text-[10px] md:text-xs font-bold text-text-primary tracking-tighter gold-gradient">CL</span>
+                <img 
+                  src="/assets/logo.png" 
+                  alt="Cini Loka Logo" 
+                  className="w-full h-full object-contain p-1.5"
+                />
             </div>
           </motion.div>
         </Magnetic>

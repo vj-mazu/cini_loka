@@ -106,7 +106,7 @@ const SelectedWorks: React.FC<{ onServiceSelect: (id: string | null) => void }> 
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   return (
-    <section id="works" className="bg-bg py-24 md:py-32 relative overflow-hidden">
+    <section id="works" className="relative overflow-hidden bg-bg py-16 md:py-32">
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-accent/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
       
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
@@ -115,7 +115,7 @@ const SelectedWorks: React.FC<{ onServiceSelect: (id: string | null) => void }> 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24"
+          className="mb-10 flex flex-col justify-between gap-8 md:mb-24 md:flex-row md:items-end"
         >
           <div className="max-w-3xl">
             <div className="flex items-center gap-5 mb-8">

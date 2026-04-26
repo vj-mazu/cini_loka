@@ -68,10 +68,10 @@ const Explorations: React.FC = () => {
   }, []);
 
   return (
-    <section id="gallery" ref={containerRef} className="relative min-h-[110vh] md:min-h-[150vh] bg-bg overflow-hidden flex flex-col items-center pt-24 pb-0 md:py-48">
+    <section id="gallery" ref={containerRef} className="relative flex min-h-[110vh] flex-col items-center overflow-hidden bg-bg pb-0 pt-12 md:min-h-[150vh] md:py-48">
       
       {/* Header */}
-      <div className="relative z-20 max-w-[1400px] mx-auto px-6 text-center mb-32 md:mb-56">
+      <div className="relative z-20 max-w-[1400px] mx-auto px-6 text-center mb-12 md:mb-56">
         <div className="flex items-center justify-center gap-5 mb-8">
           <div className="w-16 h-[1.5px] bg-accent/30" />
           <span className="text-[11px] text-accent tracking-[0.6em] font-bold uppercase opacity-80">
@@ -86,10 +86,10 @@ const Explorations: React.FC = () => {
 
       {/* Parallax Images Column Layout */}
       <div className="relative z-0 w-full max-w-[1500px] mx-auto px-6 mt-10 mb-[10vh]">
-        <div className="grid grid-cols-2 gap-10 md:gap-48 pt-20 md:pt-0">
+        <div className="grid grid-cols-2 gap-6 md:gap-48 pt-8 md:pt-0">
           
           {/* Left Column */}
-          <div className="flex flex-col gap-10 md:gap-[20vh] pt-10 md:pt-0">
+          <div className="flex flex-col gap-10 md:gap-[20vh] pt-0 md:pt-0">
             {ITEMS.filter(item => item.side === "left").map((item) => {
               const globalIdx = ITEMS.indexOf(item);
               return (
@@ -106,7 +106,7 @@ const Explorations: React.FC = () => {
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col gap-10 md:gap-[20vh] pt-[25vh]">
+          <div className="flex flex-col gap-10 md:gap-[20vh] pt-[15vh] md:pt-[25vh]">
             {ITEMS.filter(item => item.side === "right").map((item) => {
               const globalIdx = ITEMS.indexOf(item);
               return (

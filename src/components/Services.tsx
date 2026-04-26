@@ -8,15 +8,7 @@ const SERVICES = [
     title: "Private Movie Screenings",
     description: "Enjoy your favorite movies or personal videos in our cozy luxury sofa environment with premium surround sound. Perfect for couples and families.",
     price: "₹500",
-    gallery: [
-      "/assets/user_images/image6.jpg",
-      "/assets/user_images/image7.jpg",
-      "/assets/ai-movie-1.png",
-      "/assets/cini-1.jpg",
-      "/assets/cini-2.jpg",
-      "/assets/cini-3.jpg",
-      "/assets/cini-4.jpg"
-    ],
+    gallery: [],
     features: ["4K HDR Projection", "7.1 Atmos Surround", "Premium Luxury Sofa Seating", "Fully Air Conditioned"],
     packages: [
       { name: "Couple Room", rate: "₹1,000 / 3 hrs" },

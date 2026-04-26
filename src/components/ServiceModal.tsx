@@ -20,9 +20,12 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const constraintsRef = React.useRef<HTMLDivElement>(null);
 
-  // Reset index when service changes
+  // Reset index and scroll position when service changes
   React.useEffect(() => {
     setCurrentIndex(0);
+    if (constraintsRef.current) {
+      constraintsRef.current.scrollLeft = 0;
+    }
   }, [service?.id]);
 
   // Body Scroll Lock
@@ -63,86 +66,114 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
             <div 
               className="w-full md:w-1/2 h-[45vh] md:h-full flex-shrink-0 relative group/gallery"
             >
-              <div 
-                ref={constraintsRef}
-                className="flex h-full overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
-                onScroll={(e) => {
-                  const target = e.currentTarget;
-                  const index = Math.round(target.scrollLeft / target.clientWidth);
-                  if (index !== currentIndex) setCurrentIndex(index);
-                }}
-              >
-                {service.gallery.map((item, idx) => (
-                  <div key={idx} className="min-w-full h-full snap-start snap-always relative flex-shrink-0">
-                    {item.endsWith(".mp4") ? (
-                      <video
-                        src={item}
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                      />
-                    ) : (
-                      <img
-                        src={item}
-                        alt={`${service.title} gallery ${idx}`}
-                        className="w-full h-full object-cover select-none"
-                        loading="lazy"
-                        draggable="false"
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Navigation Arrows (Visible on hover) */}
-              <div className="absolute inset-0 pointer-events-none flex items-center justify-between px-6 opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-500">
-                <button 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const container = constraintsRef.current;
-                    if (container) container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
-                  }}
-                  className={`w-12 h-12 rounded-full glass flex items-center justify-center text-white pointer-events-auto transition-transform hover:scale-110 active:scale-95 ${currentIndex === 0 ? "opacity-20 cursor-not-allowed" : "opacity-100"}`}
-                >
-                  ←
-                </button>
-                <button 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const container = constraintsRef.current;
-                    if (container) container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
-                  }}
-                  className={`w-12 h-12 rounded-full glass flex items-center justify-center text-white pointer-events-auto transition-transform hover:scale-110 active:scale-95 ${currentIndex === service.gallery.length - 1 ? "opacity-20 cursor-not-allowed" : "opacity-100"}`}
-                >
-                  →
-                </button>
-              </div>
-              
-              {/* Pagination Dots */}
-              <div className="absolute bottom-10 left-0 right-0 flex justify-center items-center gap-2 z-30 pointer-events-none">
-                {service.gallery.map((_, idx) => (
+              {service.gallery.length > 0 ? (
+                <>
                   <div 
-                    key={idx}
-                    className={`transition-all duration-500 rounded-full h-1 ${
-                      idx === currentIndex 
-                        ? "w-10 bg-accent shadow-[0_0_15px_rgba(226,194,133,0.5)]" 
-                        : "w-2 bg-white/20"
-                    }`} 
-                  />
-                ))}
-              </div>
+                    ref={constraintsRef}
+                    className="flex h-full overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
+                    onScroll={(e) => {
+                      const target = e.currentTarget;
+                      const index = Math.round(target.scrollLeft / target.clientWidth);
+                      if (index !== currentIndex) setCurrentIndex(index);
+                    }}
+                  >
+                    {service.gallery.map((item, idx) => (
+                      <div key={idx} className="min-w-full h-full snap-start snap-always relative flex-shrink-0">
+                        {item.endsWith(".mp4") ? (
+                          <video
+                            src={item}
+                            className="w-full h-full object-cover"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            preload="metadata"
+                          />
+                        ) : (
+                          <img
+                            src={item}
+                            alt={`${service.title} gallery ${idx}`}
+                            className="w-full h-full object-cover select-none"
+                            loading="lazy"
+                            draggable="false"
+                          />
+                        )}
+                      </div>
+                    ))}
+                  </div>
 
-              {/* Swipe Hint */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: currentIndex === 0 ? 1 : 0 }}
-                className="absolute bottom-16 left-1/2 -translate-x-1/2 text-[10px] text-white/40 uppercase tracking-[0.4em] font-bold pointer-events-none"
-              >
-                Swipe to Explore
-              </motion.div>
+                  {/* Navigation Arrows (Visible on hover) */}
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-between px-6 opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-500">
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const container = constraintsRef.current;
+                        if (container) container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
+                      }}
+                      className={`w-12 h-12 rounded-full glass flex items-center justify-center text-white pointer-events-auto transition-transform hover:scale-110 active:scale-95 ${currentIndex === 0 ? "opacity-20 cursor-not-allowed" : "opacity-100"}`}
+                    >
+                      ←
+                    </button>
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const container = constraintsRef.current;
+                        if (container) container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+                      }}
+                      className={`w-12 h-12 rounded-full glass flex items-center justify-center text-white pointer-events-auto transition-transform hover:scale-110 active:scale-95 ${currentIndex === service.gallery.length - 1 ? "opacity-20 cursor-not-allowed" : "opacity-100"}`}
+                    >
+                      →
+                    </button>
+                  </div>
+                  
+                  {/* Pagination Dots */}
+                  <div className="absolute bottom-10 left-0 right-0 flex justify-center items-center gap-2 z-30 pointer-events-none">
+                    {service.gallery.map((_, idx) => (
+                      <div 
+                        key={idx}
+                        className={`transition-all duration-500 rounded-full h-1 ${
+                          idx === currentIndex 
+                            ? "w-10 bg-accent shadow-[0_0_15px_rgba(226,194,133,0.5)]" 
+                            : "w-2 bg-white/20"
+                        }`} 
+                      />
+                    ))}
+                  </div>
+
+                  {/* Swipe Hint */}
+                  {service.gallery.length > 1 && (
+                    <motion.div 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: currentIndex === 0 ? 1 : 0 }}
+                      className="absolute bottom-16 left-1/2 -translate-x-1/2 text-[10px] text-white/40 uppercase tracking-[0.4em] font-bold pointer-events-none"
+                    >
+                      Swipe to Explore
+                    </motion.div>
+                  )}
+                </>
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-bg via-bg/95 to-bg/90 overflow-hidden border-r border-white/5">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[80px] rounded-full translate-x-1/2 -translate-y-1/2" />
+                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 blur-[80px] rounded-full -translate-x-1/2 translate-y-1/2" />
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.2 }}
+                    className="relative z-10 max-w-md px-6"
+                  >
+                    <span className="text-5xl text-accent/40 block mb-6 font-display italic">❝</span>
+                    <p className="text-2xl md:text-3xl lg:text-4xl font-display italic leading-relaxed tracking-tight text-white/90 mb-6">
+                      Where Every <span className="gold-gradient">Frame</span><br/> Becomes a Memory.
+                    </p>
+                    <span className="text-5xl text-accent/40 block mt-2 font-display italic">❞</span>
+                    <div className="w-16 h-[1px] bg-accent/30 mx-auto mt-10" />
+                    <span className="block text-[10px] uppercase tracking-[0.4em] text-accent mt-6 font-bold">
+                      {service.title}
+                    </span>
+                  </motion.div>
+                </div>
+              )}
 
               <div className="absolute inset-0 bg-gradient-to-t from-bg/60 via-transparent to-transparent md:hidden pointer-events-none" />
             </div>

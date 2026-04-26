@@ -21,7 +21,7 @@ const PROJECTS = [
     category: "Kids Events",
     image: "/assets/user_images/image6.jpg",
     span: "md:col-span-5",
-    serviceId: "birthday"
+    serviceId: "kids"
   },
   {
     title: "Birthday Setup",
@@ -31,11 +31,11 @@ const PROJECTS = [
     serviceId: "birthday"
   },
   {
-    title: "Couple Birthday Room",
-    category: "Celebrations",
-    image: "/assets/cini-2.jpg",
+    title: "Corporate Events",
+    category: "Professional",
+    image: "/assets/cini-4.jpg",
     span: "md:col-span-6",
-    serviceId: "birthday"
+    serviceId: "corporate"
   },
   {
     title: "Private Theater Experience",

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { attachHls } from "../utils/hlsLoader";
 import gsap from "gsap";
 import { motion } from "framer-motion";
@@ -8,8 +8,16 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
+  const [isCopied, setIsCopied] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
+
+  const copyEmail = (e: React.MouseEvent) => {
+    // We let the default mailto: trigger, but also copy to clipboard
+    navigator.clipboard.writeText("ciniloka.raichur@gmail.com");
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -108,12 +116,13 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
 
             <a
               href="mailto:ciniloka.raichur@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={copyEmail}
               className="group relative flex flex-col sm:flex-row items-center justify-between gap-8 px-8 md:px-16 py-10 md:py-12 rounded-[2.5rem] md:rounded-[3rem] glass hover:bg-white/[0.08] transition-all duration-700 shadow-2xl cursor-pointer z-10 w-full max-w-2xl mx-auto"
             >
               <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-0">
-                <span className="text-[10px] text-accent tracking-[0.6em] font-black uppercase mb-3 opacity-80">Email</span>
+                <span className="text-[10px] text-accent tracking-[0.6em] font-black uppercase mb-3 opacity-80">
+                  {isCopied ? "Email Copied!" : "Email"}
+                </span>
                 <span className="text-xl md:text-4xl font-display italic text-text-primary group-hover:gold-gradient transition-all duration-700 break-all sm:break-normal">
                   ciniloka.raichur@gmail.com
                 </span>

@@ -183,7 +183,7 @@ const HorizontalShowcase: React.FC = () => {
               >
                 {"images" in item ? (
                   <div className="absolute inset-0 z-0 flex gap-2 h-full p-0">
-                    {item.images.map((img, i) => (
+                    {item.images?.map((img, i) => (
                       <div key={i} className="parallax-img relative overflow-hidden flex-1">
                         <img
                           src={img}

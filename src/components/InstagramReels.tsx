@@ -5,7 +5,7 @@ const reels = [
   {
     id: 1,
     url: "https://www.instagram.com/reel/DHGY5AABc1J/?igsh=MThjMTV3bnh3aHRsag==",
-    coverImage: "/assets/reel-cover.jpg",
+    coverImage: "/assets/reel-cover-v2.jpg",
     title: "Live Match Experience",
     views: "21.5K"
   }

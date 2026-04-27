@@ -17,6 +17,7 @@ const TextRibbon = React.lazy(() => import("./components/TextRibbon"));
 const TextRibbonHero = React.lazy(() => import("./components/TextRibbonHero"));
 const Specs = React.lazy(() => import("./components/Specs"));
 const Amenities = React.lazy(() => import("./components/Amenities"));
+const InstagramReels = React.lazy(() => import("./components/InstagramReels"));
 import SmoothScroll from "./components/SmoothScroll";
 import PrivacyModal from "./components/PrivacyModal";
 
@@ -79,6 +80,7 @@ function App() {
               <Explorations />
               <TextRibbon />
               <Stats />
+              <InstagramReels />
               <Footer onPrivacyOpen={() => setIsPrivacyOpen(true)} />
               <FloatingPhone />
               

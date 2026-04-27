@@ -121,7 +121,7 @@ export const InstagramReels = () => {
           className="mt-20 flex flex-col items-center"
         >
           <a
-            href="https://www.instagram.com/cine_central_raichur/"
+            href="https://www.instagram.com/ciniloka/"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center gap-4 bg-white text-black px-12 py-6 rounded-full overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl active:scale-95"

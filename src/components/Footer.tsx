@@ -197,7 +197,7 @@ const Footer: React.FC<FooterProps> = ({ onPrivacyOpen }) => {
                 WhatsApp
               </a>
               <a 
-                href="https://www.instagram.com/cini_loka_raichur?igsh=YXN5Y3BkM3o4cHg2" 
+                href="https://www.instagram.com/ciniloka/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="group flex items-center gap-3 text-[10px] text-muted hover:text-rose-500 transition-all duration-500 font-bold tracking-[0.3em] uppercase"

@@ -94,13 +94,17 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                             <motion.img
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              transition={{ duration: 0.8 }}
+                              transition={{ duration: 0.6 }}
                               src={item}
                               alt={`${service.title} gallery ${idx}`}
-                              className="w-full h-full object-cover select-none"
+                              className="w-full h-full object-cover select-none transition-opacity duration-700"
                               loading={idx === 0 ? "eager" : "lazy"}
+                              {...(idx === 0 ? { fetchpriority: "high" } : {})}
                               draggable="false"
-                              onLoad={(e) => (e.target as HTMLImageElement).style.opacity = "1"}
+                              onLoad={(e) => {
+                                (e.target as HTMLImageElement).style.opacity = "1";
+                                (e.target as HTMLImageElement).parentElement?.querySelector('.animate-shimmer')?.remove();
+                              }}
                             />
                             {/* Subtle Pulse Loader */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer" />

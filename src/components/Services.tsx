@@ -23,15 +23,15 @@ const SERVICES = [
     description: "Create unforgettable birthday memories with our customizable decor. Pricing starts from ₹500.",
     price: "₹500",
     gallery: [
-      "/assets/user_images/image3.jpg",
-      "/assets/user_images/image4.jpg",
-      "/assets/user_images/image5.jpg",
+      "/assets/user_images/image3.webp",
+      "/assets/user_images/image4.webp",
+      "/assets/user_images/image5.webp",
       "/assets/venue-video-1.mp4",
       "/assets/venue-video-2.mp4",
-      "/assets/bday-custom-1.jpg",
-      "/assets/bday-custom-2.jpg",
-      "/assets/cini-2.jpg",
-      "/assets/cini-4.jpg"
+      "/assets/bday-custom-1.webp",
+      "/assets/bday-custom-2.webp",
+      "/assets/cini-2.webp",
+      "/assets/cini-4.webp"
     ],
     features: ["Custom Decor Packages", "Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)"],
     packages: [
@@ -49,8 +49,10 @@ const SERVICES = [
     features: ["Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)", "Romantic Floral Decor"],
     gallery: [
       "/assets/ai-anniversary-1.webp",
-      "/assets/anni-custom-2.jpg",
-      "/assets/ai-anniversary-3.webp"
+      "/assets/ai-anniversary-2.webp",
+      "/assets/ai-anniversary-3.webp",
+      "/assets/anni-custom-1.webp",
+      "/assets/anni-custom-3.webp"
     ],
   },
   {
@@ -59,7 +61,7 @@ const SERVICES = [
     title: "Corporate Events",
     description: "Professional meetings and team celebrations in a sophisticated venue.",
     price: "₹500",
-    gallery: ["/assets/cini-4.jpg", "/assets/cini-1.jpg", "/assets/cini-3.jpg"],
+    gallery: ["/assets/cini-4.webp", "/assets/cini-1.webp", "/assets/cini-3.webp"],
     features: ["Presentation Equipment", "High-Speed Wifi", "Refreshment Support", "Flexible Seating Layouts"],
   },
   {
@@ -69,11 +71,11 @@ const SERVICES = [
     description: "Bespoke themed experiences tailored to your vision. Specialized in Traditional Functions and elegant setups.",
     price: "₹500",
     gallery: [
-      "/assets/user_images/image1.jpg",
-      "/assets/user_images/image2.jpg",
-      "/assets/cini-1.jpg",
-      "/assets/cini-4.jpg",
-      "/assets/cini-2.jpg"
+      "/assets/user_images/image1.webp",
+      "/assets/user_images/image2.webp",
+      "/assets/cini-1.webp",
+      "/assets/cini-4.webp",
+      "/assets/cini-2.webp"
     ],
     features: ["Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)", "Traditional Function Themes"],
   },
@@ -83,7 +85,7 @@ const SERVICES = [
     title: "Kids-Friendly Experiences",
     description: "A safe, fun, and beautifully decorated space for children's parties.",
     price: "₹500",
-    gallery: ["/assets/user_images/image6.jpg", "/assets/cini-2.jpg", "/assets/bday-custom-2.jpg"],
+    gallery: ["/assets/user_images/image6.webp", "/assets/cini-2.webp", "/assets/bday-custom-2.webp"],
     features: ["Child-Safe Environment", "Colorful Themed Decor", "Cartoon Screenings"],
   },
 ];

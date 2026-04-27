@@ -6,21 +6,21 @@ const SERVICES = [
     id: "movie",
     icon: "🎬",
     title: "Private Movie Screenings",
-    description: "Enjoy your favorite movies or personal videos in our cozy luxury sofa environment with premium surround sound. Perfect for couples and families.",
+    description: "Enjoy your favorite blockbusters, live sports, or personal videos in an ultra-premium luxury sofa environment. Complete with a massive 150-inch 4K screen and immersive surround sound.",
     price: "₹500",
     gallery: [],
-    features: ["4K HDR Projection", "7.1 Atmos Surround", "Premium Luxury Sofa Seating", "Fully Air Conditioned"],
+    features: ["Massive 150-inch 4K HDR Screen", "Immersive 7.1 Atmos Sound", "Ultra-Premium Luxury Sofas", "Live IPL & All Major OTTs"],
     packages: [
       { name: "Couple Room", rate: "₹1,000 / 3 hrs" },
       { name: "Family Room", rate: "₹1,300 / 3 hrs" },
-      { name: "Birthday Special", rate: "Decor + Screening" }
+      { name: "OTT & Sports", rate: "All Platforms Included" }
     ]
   },
   {
     id: "birthday",
     icon: "🎂",
     title: "Birthday Celebrations",
-    description: "Create unforgettable birthday memories with our customizable decor. Pricing starts from ₹500.",
+    description: "Turn your special day into a cinematic masterpiece. From custom themes to surprise reveals, we handle every detail while you relax in luxury.",
     price: "₹500",
     gallery: [
       "/assets/user_images/image3.webp",
@@ -33,11 +33,11 @@ const SERVICES = [
       "/assets/cini-2.webp",
       "/assets/cini-4.webp"
     ],
-    features: ["Custom Decor Packages", "Fog Entry", "Bubble Show Available", "Catering Available (20+ Plates)"],
+    features: ["Grand Celebration Decor", "Magical Surprise Reveal", "Cinematic Entry & Music", "Catering (20+ Plates)"],
     packages: [
-      { name: "Couple Birthday", rate: "₹800" },
-      { name: "Family Birthday", rate: "₹1,000" },
-      { name: "Birthday + Movie", rate: "Special Rates" }
+      { name: "Birthday + Movie", rate: "Full Package" },
+      { name: "Custom Themes", rate: "Premium Options" },
+      { name: "Photography", rate: "Available on Request" }
     ]
   },
   {

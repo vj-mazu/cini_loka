@@ -15,6 +15,8 @@ const FloatingPhone = React.lazy(() => import("./components/FloatingPhone"));
 const HorizontalShowcase = React.lazy(() => import("./components/HorizontalShowcase"));
 const TextRibbon = React.lazy(() => import("./components/TextRibbon"));
 const TextRibbonHero = React.lazy(() => import("./components/TextRibbonHero"));
+const Specs = React.lazy(() => import("./components/Specs"));
+const Amenities = React.lazy(() => import("./components/Amenities"));
 import SmoothScroll from "./components/SmoothScroll";
 import PrivacyModal from "./components/PrivacyModal";
 
@@ -68,9 +70,11 @@ function App() {
               <Navbar />
               <Hero />
               <TextRibbonHero />
+              <Specs />
               <Services selectedServiceId={selectedServiceId} onServiceSelect={setSelectedServiceId} />
               <HorizontalShowcase />
               <SelectedWorks onServiceSelect={setSelectedServiceId} />
+              <Amenities />
               <Reviews />
               <Explorations />
               <TextRibbon />

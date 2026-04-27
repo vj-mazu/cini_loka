@@ -90,13 +90,21 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                             preload="metadata"
                           />
                         ) : (
-                          <img
-                            src={item}
-                            alt={`${service.title} gallery ${idx}`}
-                            className="w-full h-full object-cover select-none"
-                            loading={idx === 0 ? "eager" : "lazy"}
-                            draggable="false"
-                          />
+                          <div className="relative w-full h-full bg-white/[0.03] overflow-hidden">
+                            <motion.img
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.8 }}
+                              src={item}
+                              alt={`${service.title} gallery ${idx}`}
+                              className="w-full h-full object-cover select-none"
+                              loading={idx === 0 ? "eager" : "lazy"}
+                              draggable="false"
+                              onLoad={(e) => (e.target as HTMLImageElement).style.opacity = "1"}
+                            />
+                            {/* Subtle Pulse Loader */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer" />
+                          </div>
                         )}
                       </div>
                     ))}

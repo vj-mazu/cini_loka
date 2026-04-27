@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
             <div className="absolute inset-0 gold-gradient group-hover:rotate-180 transition-transform duration-1000" />
             <div className="w-full h-full bg-bg rounded-full flex items-center justify-center relative z-10">
                 <img 
-                  src="/assets/logo.png" 
+                  src="/assets/logo.webp" 
                   alt="Cini Loka Logo" 
                   className="w-full h-full object-contain p-1.5"
                 />

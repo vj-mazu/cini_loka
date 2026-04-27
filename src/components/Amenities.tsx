@@ -1,5 +1,5 @@
 import React from 'react';
-import { Utensils, Book, Gift, PartyPopper, Star, Shield } from 'lucide-react';
+import { Utensils, Gift, PartyPopper, Star, Shield, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const amenities = [
@@ -14,9 +14,9 @@ const amenities = [
     desc: "Themed props and accessories for your celebrations" 
   },
   { 
-    icon: <Book size={24} />, 
-    title: "Book Section", 
-    desc: "A dedicated reading corner for waiting guests" 
+    icon: <Users size={24} />, 
+    title: "Cozy Waiting Area", 
+    desc: "A comfortable space for your group to relax before the show" 
   },
   { 
     icon: <Gift size={24} />, 
